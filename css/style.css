@@ -1731,7 +1731,7 @@ background-color: #f9f9f9;
 
 @media (max-width: 500px) {
 	.code{
-		max-width:400px;
+		max-width:300px;
 	}
 }
 
