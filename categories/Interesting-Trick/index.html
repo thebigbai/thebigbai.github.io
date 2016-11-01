@@ -61,7 +61,7 @@
 </div>
 
 	  
-		<div id="container">
+		<div id="container" style="max-width:100%;">
 			
 
 
@@ -216,8 +216,8 @@
 <script>
 	function load_pic(){
 		var imgObj = document.getElementById("aliqcode");
-		var Flag=(imgObj.getAttribute("src",2)=="/images/alipay.png")
-		imgObj.src=Flag?"":"/images/alipay.png";
+		var Flag=(imgObj.getAttribute("src",2)=="/images/wechat.jpg")
+		imgObj.src=Flag?"":"/images/wechat.jpg";
 		
 		var textObj = document.getElementById("donate_btn");
 		if(textObj.innerHTML =="Scan QR Code by AliPay")
