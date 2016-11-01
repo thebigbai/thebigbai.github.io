@@ -147,9 +147,9 @@
 					<p></p>
 					<div class="denote">
 						<div>
-							<img id="aliqcode" class="denote_img img-responsive center-block" src="" />
+							<img onclick="load_pic()" id="aliqcode" class="denote_img img-responsive center-block" src="" />
 						</div>
-						<a class="donate_btn" id="donate_btn" onclick="load_pic()" ><font="隶书">赏&nbsp&nbsp</font>Enjoy it ? Donate me.</a>
+						<a class="donate_btn" id="donate_btn" onclick="load_pic()" >￥ Donate me.</a>
 					</div>
 					<p></p>
 					<!--share-->
@@ -290,7 +290,7 @@
 		var textObj = document.getElementById("donate_btn");
 		if(textObj.innerHTML =="Scan WeChat QR Code")
 		{
-			textObj.innerHTML ="Enjoy it ? Donate me.";
+			textObj.innerHTML ="￥ Donate me.";
 		}
 		else
 		{
