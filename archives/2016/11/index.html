@@ -73,7 +73,7 @@
 						<!-- Image -->
 						<article class="post">
 							<div class="post-title">
-								<h1><a>Date: 2016/10</a>
+								<h1><a>Date: 2016/11</a>
 								</h1>
 							</div>
 							<div class="post-thumb">
@@ -89,19 +89,22 @@
 						
 						<article class="post">	
 							<div class="post-title">
-								<h1><a href="/2016/10/26/BIGBAI的第一篇/" title="link to BIGBAI的第一篇">BIGBAI的第一篇</a>
+								<h1><a href="/2016/11/01/BIGBAI的第一篇/" title="link to BIGBAI的第一篇">BIGBAI的第一篇</a>
 								</h1>
 							</div>
 							<div class="post-meta">
 								<span class="author">Big Bai</span>
-								<span class="dates">2016-10-26</span>
+								<span class="dates">2016-11-01</span>
 							</div>
 							<div class="post-content">
 								<p>
 									
+									  <!-- toc -->
+<p>Hi，这是BigBai的第一篇，欢迎大家以后常来看看。</p>
+									
 								</p>
 								
-								<a class="btn" href="/2016/10/26/BIGBAI的第一篇/">Read More</a>
+								<a class="btn" href="/2016/11/01/BIGBAI的第一篇/">Read More</a>
 							</div>	  
 
 						</article>
@@ -148,7 +151,7 @@
 					Archives
 				</h3
 				<ul>
-					<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
+					<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li></ul>
 				</ul>
 			</div>
 		</div>
@@ -209,6 +212,24 @@
 
 <!-- Custom Script -->    
 <script src="/js/main.js"></script>
+
+<script>
+	function load_pic(){
+		var imgObj = document.getElementById("aliqcode");
+		var Flag=(imgObj.getAttribute("src",2)=="/images/alipay.png")
+		imgObj.src=Flag?"":"/images/alipay.png";
+		
+		var textObj = document.getElementById("donate_btn");
+		if(textObj.innerHTML =="Scan QR Code by AliPay")
+		{
+			textObj.innerHTML ="Enjoy it ? Donate me.";
+		}
+		else
+		{
+			textObj.innerHTML ="Scan QR Code by AliPay";
+		}
+	}
+</script>
 </body>
 
 </html>

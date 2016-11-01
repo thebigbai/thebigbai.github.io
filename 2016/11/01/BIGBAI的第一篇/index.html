@@ -94,18 +94,25 @@
 
 					<!-- Date and Author -->
 					<p class="post-meta">
-						2016-10-26
+						2016-11-01
 						
 					</p>
 
 					<!-- Content -->
-					<div id="2016-10-26" class="post-content">
+					<div id="2016-11-01" class="post-content">
 					
 						<!-- Table of Contents -->
 						
+						<div id="toc" class="toc-article">
+							<strong class="toc-title">Table of Content</strong>
+							<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#札记"><span class="toc-number">1.</span> <span class="toc-text">札记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建Hexo主题"><span class="toc-number">2.</span> <span class="toc-text">创建Hexo主题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#模板的应用"><span class="toc-number">2.1.</span> <span class="toc-text">模板的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于About页面"><span class="toc-number">2.2.</span> <span class="toc-text">关于About页面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo的一些小坑"><span class="toc-number">3.</span> <span class="toc-text">Hexo的一些小坑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Coding-Github双托管"><span class="toc-number">3.1.</span> <span class="toc-text">Coding+Github双托管</span></a></li></ol></li></ol>
+						</div>
 						
 						
-						<p>Hi，这是BigBai的第一篇，欢迎大家以后常来看看。</p>
+						
+						<!-- toc -->
+<p>Hi，这是BigBai的第一篇，欢迎大家以后常来看看。</p>
+<a id="more"></a>
 <h2 id="札记"><a href="#札记" class="headerlink" title="札记"></a>札记</h2><p>故事要从很久以前说起，那时我还是一个少年，一直都想弄一个自己的个人页面，其中的原因大也如下罢：</p>
 <blockquote>
 <ul>
@@ -119,7 +126,7 @@
 <p>很多coder都把Hexo用作技术博客，我觉得生活多姿多彩，什么都有点才好。所以BIGBAI就不作为纯技术博客了，那些有的没的也得写写啊。欢迎各位看官有事没事都来这里看我扯扯淡，<a style="color: #B8860B">看得开心还可以打赏一下小的我</a>。</p>
 <p>好了，就闲扯这么多了。欢迎来到BIGBAI！</p>
 <hr>
-<p>##创建Hexo主题<br>该正经的时候也要正经一下，自己写主题学到的一些东西，还是记录一下比较好，万一以后要用，又忘记了。</p>
+<h2 id="创建Hexo主题"><a href="#创建Hexo主题" class="headerlink" title="创建Hexo主题"></a>创建Hexo主题</h2><p>该正经的时候也要正经一下，自己写主题学到的一些东西，还是记录一下比较好，万一以后要用，又忘记了。</p>
 <h3 id="模板的应用"><a href="#模板的应用" class="headerlink" title="模板的应用"></a>模板的应用</h3><p>Hexo的主题页面实际上是通过一系列<em>.ejs</em>文件中的<em>html</em>代码拼出来的。一般会设置一个<em>layout.ejs</em>文件，作为布局，之后无论是<em>index.ejs</em>或是<em>archieve.ejs</em>文件的内容都是添加到<em>layout.ejs</em>里面组成一份完整的前端页面代码。举个例子来说：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//index.ejs</div><div class="line">&lt;div&gt;</div><div class="line">    Hi, Welcome to BIGBAI!</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
 <p>以上是<em>index.ejs</em>中的内容。就是显示一个div标签。再看<em>layout.ejs</em>：</p>
@@ -129,8 +136,8 @@
 <h3 id="关于About页面"><a href="#关于About页面" class="headerlink" title="关于About页面"></a>关于About页面</h3><p>Hexo主题中的其实默认是<a style="color: #B8860B">只有index和archieve两种页面的</a>。如果想在导航栏增加其他页面，例如About页面，需要在GitBash里输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new page &quot;about&quot;</div></pre></td></tr></table></figure></p>
 <p>之后会在source文件夹下新建了一个about文件夹，里面有一个<em>index.md</em>文件。这里有一个问题，新建的页面默认都是走默认的page的模板的，<a style="color: #B8860B">如果想要强行变为其他的布局，</a>可以在<em>index.md</em>中加上：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line"></div><div class="line">title: about</div><div class="line"></div><div class="line">date: 2016-10-26 17:19:34</div><div class="line"></div><div class="line">layout: new_layout</div><div class="line">---</div></pre></td></tr></table></figure></p>
 <p>然后再创建一个<em>new_layout.ejs</em>的文件，写入自己想要的html代码就行了。</p>
-<p>##Hexo的一些小坑<br>这部分想得起多少写多少吧，以后可能还会补充，毕竟做的时间零零碎碎，有些坑现在已经忘记了。</p>
-<p>###Coding+Github双托管<br>由于Github在国外有时候访问速度实在捉急，于是我决定把网站也托管到Coding。无论部署在哪里，首先<a style="color: #B8860B">一定要先安装Hexo的git部署工具：</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
+<h2 id="Hexo的一些小坑"><a href="#Hexo的一些小坑" class="headerlink" title="Hexo的一些小坑"></a>Hexo的一些小坑</h2><p>这部分想得起多少写多少吧，以后可能还会补充，毕竟做的时间零零碎碎，有些坑现在已经忘记了。</p>
+<h3 id="Coding-Github双托管"><a href="#Coding-Github双托管" class="headerlink" title="Coding+Github双托管"></a>Coding+Github双托管</h3><p>由于Github在国外有时候访问速度实在捉急，于是我决定把网站也托管到Coding。无论部署在哪里，首先<a style="color: #B8860B">一定要先安装Hexo的git部署工具：</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
 <p>之后在自己网站的根目录下的<em>config.yml</em>中的deploy部分，如下填写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">deploy: </div><div class="line">  type: git</div><div class="line">  repo: </div><div class="line">    coding: https://git.coding.net/thebigbai/thebigbai.git</div><div class="line">    github: https://github.com/thebigbai/thebigbai.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
 <p>这里有个小小的坑是什么呢？如果使用ssh做提交，肯定没有问题。只是ssh公钥私钥太烦，不利于多台电脑写文章，用了https方式提交。然而，<a style="color: #B8860B">github一直显示失败</a>。遇到这种情况，我强烈建议在确认格式，账号密码都对的条件下，<a style="color: #B8860B">反复提交，多次提交，不厌其烦的提交，总有一次你会成功的。</a>这tm是github链接不稳定的原因！</p>
 <p>好了，就先写这么多吧！</p>
@@ -139,9 +146,15 @@
 					
 					
 					<p></p>
-
+					<div class="denote">
+						<div>
+							<img id="aliqcode" class="denote_img img-responsive center-block" src="" />
+						</div>
+						<a class="donate_btn" id="donate_btn" onclick="load_pic()">Enjoy it ? Donate me.</a>
+					</div>
+					<p></p>
 					<!--share-->
-					<div class="ds-share flat" data-thread-key="post-2016/10/26/BIGBAI的第一篇/-BIGBAI的第一篇" data-title="BIGBAI的第一篇" data-images="" data-content="" data-url="http://www.bigbai.com.cn/2016/10/26/BIGBAI的第一篇/">
+					<div class="ds-share flat" data-thread-key="post-2016/11/01/BIGBAI的第一篇/-BIGBAI的第一篇" data-title="BIGBAI的第一篇" data-images="" data-content="" data-url="http://www.bigbai.com.cn/2016/11/01/BIGBAI的第一篇/">
 						<div class="ds-share-inline">
 							<div class="ds-share-icons-more">
 							</div>
@@ -160,7 +173,7 @@
 
 
 					<!-- 多说评论框 start -->
-						<div class="ds-thread" data-thread-key="post-2016/10/26/BIGBAI的第一篇/-BIGBAI的第一篇" data-title="BIGBAI的第一篇" data-url="http://www.bigbai.com.cn/2016/10/26/BIGBAI的第一篇/"></div>
+						<div class="ds-thread" data-thread-key="post-2016/11/01/BIGBAI的第一篇/-BIGBAI的第一篇" data-title="BIGBAI的第一篇" data-url="http://www.bigbai.com.cn/2016/11/01/BIGBAI的第一篇/"></div>
 						<!-- 多说评论框 end -->
 						<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 						<script type="text/javascript">
@@ -213,7 +226,7 @@
 					Archives
 				</h3
 				<ul>
-					<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
+					<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li></ul>
 				</ul>
 			</div>
 		</div>
@@ -268,6 +281,24 @@
 
 <!-- Custom Script -->    
 <script src="/js/main.js"></script>
+
+<script>
+	function load_pic(){
+		var imgObj = document.getElementById("aliqcode");
+		var Flag=(imgObj.getAttribute("src",2)=="/images/alipay.png")
+		imgObj.src=Flag?"":"/images/alipay.png";
+		
+		var textObj = document.getElementById("donate_btn");
+		if(textObj.innerHTML =="Scan QR Code by AliPay")
+		{
+			textObj.innerHTML ="Enjoy it ? Donate me.";
+		}
+		else
+		{
+			textObj.innerHTML ="Scan QR Code by AliPay";
+		}
+	}
+</script>
 </body>
 
 </html>

@@ -149,6 +149,24 @@
 
 <!-- Custom Script -->    
 <script src="/js/main.js"></script>
+
+<script>
+	function load_pic(){
+		var imgObj = document.getElementById("aliqcode");
+		var Flag=(imgObj.getAttribute("src",2)=="/images/alipay.png")
+		imgObj.src=Flag?"":"/images/alipay.png";
+		
+		var textObj = document.getElementById("donate_btn");
+		if(textObj.innerHTML =="Scan QR Code by AliPay")
+		{
+			textObj.innerHTML ="Enjoy it ? Donate me.";
+		}
+		else
+		{
+			textObj.innerHTML ="Scan QR Code by AliPay";
+		}
+	}
+</script>
 </body>
 
 </html>

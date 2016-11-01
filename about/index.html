@@ -66,10 +66,11 @@
 	<div class="row">
 		<div class="about-col-1 col-md-9">
 			<article class="post">
-					<div class="post-title">
-						<h1><a>About</a>
-						</h1>
-					</div>
+				<div class="post-title">
+					<h1><a>About</a>
+					</h1>
+				</div>
+				<p></p>
 				<div class="post-thumb">
 					<a>
 						<img src="/images/me.png" alt="It is me." />						
@@ -79,8 +80,7 @@
 		</div>
 		
 		<div class="about-col-2 col-md-3 sidebar">
-			<p></p>
-			<p></p>
+			<p>&nbsp</p>
 			<p>I am currently a R&D engineer at the R&D department of China Film Co.,Ltd.. My work is mainly about the virtual studio system development and film prodution workflow optimization.</p>
 			<p>Before I started my job, I got my master degree in Artifcial intellgence(Robotics) at the University of Edinburgh, UK, 2013. I am interested in computer vision, robotics, computer graphics and machine learning.</p>
 			<p>In this site, I would like to share something about my work, study and life. 
@@ -135,6 +135,24 @@
 
 <!-- Custom Script -->    
 <script src="/js/main.js"></script>
+
+<script>
+	function load_pic(){
+		var imgObj = document.getElementById("aliqcode");
+		var Flag=(imgObj.getAttribute("src",2)=="/images/alipay.png")
+		imgObj.src=Flag?"":"/images/alipay.png";
+		
+		var textObj = document.getElementById("donate_btn");
+		if(textObj.innerHTML =="Scan QR Code by AliPay")
+		{
+			textObj.innerHTML ="Enjoy it ? Donate me.";
+		}
+		else
+		{
+			textObj.innerHTML ="Scan QR Code by AliPay";
+		}
+	}
+</script>
 </body>
 
 </html>
