@@ -1630,6 +1630,11 @@ background-color: #f9f9f9;
 	color: #e8c7a4;
 }
 
+.content_align{
+    text-align: justify;
+    text-justify: inter-ideograph;
+}
+
 /*toc*/
 .toc-article{
     border: 1px solid #303030;
@@ -1748,5 +1753,7 @@ pre {
     border: 0px;
     border-radius: 4px;
 }
+
+
 
 
