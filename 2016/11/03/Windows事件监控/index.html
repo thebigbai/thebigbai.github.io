@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="baidu-site-verification" content="MmSp9r4WgS" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/darcula.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/favicon/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/images/favicon/favicon.png" type="image/x-icon">
+
+    <title>The BIGBAI</title>
+	
+    <!--Library Styles-->    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/lib/font-awesome.css" rel="stylesheet">
+    <link href="/css/lib/nivo-lightbox.css" rel="stylesheet">
+    <link href="/css/lib/nivo-themes/default/default.css" rel="stylesheet">
+	
+    <!--Template Styles-->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/scheme/purple.css" rel="stylesheet">
+
+
+
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+      <script src="/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body data-spy="scroll" id="top">
+	<div id="main-wrapper">
+		<!-- Site Navigation -->
+		<div id="menu">
+	<nav class="navbar navbar-default" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html#">
+				<img src="/images/logo.png" alt="logo">
+			</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-navbar-collapse">
+			<ul class="nav navbar-nav">
+				
+					<li><a class="nav-font-size" href="/">Home</a></li>
+				
+					<li><a class="nav-font-size" href="/archives">Archives</a></li>
+				
+					<li><a class="nav-font-size" href="/about">About</a></li>
+				
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</nav>
+</div>
+
+	  
+		<div id="container" style="max-width:100%;">
+			<section id="blog-full" class="blog">
+	<div class="row">
+		<div class="col-md-9">
+			<div id="primary" class="row">
+				<div class="blog-post">
+					<!-- Title -->
+					<h2 class="post-title">
+						<a class="article-full-color">
+							Windows事件监控
+						</a>
+					</h2>
+					
+					<!-- Tags and Categories links -->
+					
+					
+
+<div class="blog-tags-container">
+    <span class="glyphicon glyphicon-tags"></span>
+    <a href="/tags/C/">#C++</a>
+</div>
+
+				
+					
+
+<div class="blog-categories-container">
+    <span class="glyphicon glyphicon-folder-open"></span>
+    <a href="/categories/Interesting-Trick/">Interesting Trick</a>
+</div>
+
+
+					<!-- Date and Author -->
+					<p class="post-meta">
+						2016-11-03
+						
+					</p>
+
+					<!-- Content -->
+					<div id="2016-11-03" class="post-content content_align">
+					
+						<!-- Table of Contents -->
+						
+						<div id="toc" class="toc-article">
+							<strong class="toc-title">Table of Content</strong>
+							<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows鼠标键盘Hook"><span class="toc-text">Windows鼠标键盘Hook</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pyHook"><span class="toc-text">pyHook</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-Hook"><span class="toc-text">C++ Hook</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU、内存查看"><span class="toc-text">CPU、内存查看</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#守护进程"><span class="toc-text">守护进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-11-线程"><span class="toc-text">C++ 11 线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#time-t与string互转"><span class="toc-text">time_t与string互转</span></a></li></ol>
+						</div>
+						
+						
+						
+						<!-- toc -->
+<p>最近的工作中，有个需求，需要监控用户使用Windows电脑时候的鼠标键盘事件、cpu内存使用量、以及守护另外一个程序。涉及到的一些知识，个人觉得除非以后要写个外挂、流氓软件、或者是盗号软件，应该以后都不会用到了。<br>但是个人觉得还是记录下来一些比较好，万一以后要用到还忘记了，就TM尴尬了。难说以后混不下去了，还可以去盗号赚点生活费什么的。</p>
+<a id="more"></a>
+<h2 id="Windows鼠标键盘Hook"><a href="#Windows鼠标键盘Hook" class="headerlink" title="Windows鼠标键盘Hook"></a><a style="color:#AE8D73"><strong>Windows鼠标键盘Hook</strong></a></h2><p>这部分本来使用PyHook做的，因为用python写起来比较简单。后来由于项目需要，改成用C++了。但是还是决定把pyHook的方法记录一下，免得以后找起来麻烦。</p>
+<h3 id="pyHook"><a href="#pyHook" class="headerlink" title="pyHook"></a><a style="color:#AE8D73"><strong>pyHook</strong></a></h3><p>首先，肯定是要安装好<a href="http://sourceforge.net/projects/pyhook/files/pyhook/1.5.1/" target="_blank" rel="external">pyHook</a>和<a href="https://sourceforge.net/projects/pywin32/" target="_blank" rel="external">pywin32</a>。毕竟需要调用的其实还是windows API。<br>之后代码就非常简单了，在<em>import pythoncom 和 import pyHook </em>之后：</p>
+<pre><code class="python">if __name__==&#39;__main__&#39;:
+    hm = pyHook.HookManager() 
+
+    hm.KeyDown = onKeyboardEvent      
+    hm.HookKeyboard()   
+    hm.MouseAll = onMouseEvent   
+    hm.HookMouse()    
+
+    pythoncom.PumpMessages()
+</code></pre>
+<p>以上创建了pyHook的句柄hm之后，剩下的其实就是两句话： 1.设置好回调函数<em>onKeyboardEvent()</em>和<em>onMouseEvent()</em>；2.挂上钩子<em>HookKeyboard()</em>和<em>HookMouse()</em>。<br>然后在回调函数里就可以查看的需要的各种监听信息了。针对不同的程序功能，可以自己筛选需要的信息处理。</p>
+<pre><code class="python">def onMouseEvent(event):
+    print &quot;MessageName:&quot;,event.MessageName
+    print &quot;Message:&quot;, event.Message
+    print &quot;Time:&quot;, event.Time
+    print &quot;Window:&quot;, event.Window
+    print &quot;WindowName:&quot;, event.WindowName
+    print &quot;Position:&quot;, event.Position
+    print &quot;Wheel:&quot;, event.Wheel
+    print &quot;Injected:&quot;, event.Injected
+
+    return True
+</code></pre>
+<pre><code class="python">def onKeyboardEvent(event):
+    print &quot;MessageName:&quot;, event.MessageName
+    print &quot;Message:&quot;, event.Message
+    print &quot;Time:&quot;, event.Time
+    print &quot;Window:&quot;, event.Window     
+    print &quot;WindowName:&quot;, event.WindowName
+    print &quot;Ascii:&quot;, event.Ascii, chr(event.Ascii)
+    print &quot;Key:&quot;, event.Key
+    print &quot;KeyID:&quot;, event.KeyID
+    print &quot;ScanCode:&quot;, event.ScanCode
+    print &quot;Extended:&quot;, event.Extended
+    print &quot;Injected:&quot;, event.Injected
+    print &quot;Alt&quot;, event.Alt
+    print &quot;Transition&quot;, event.Transition
+
+    return True
+</code></pre>
+<p>这里有一个很神奇的地方，鼠标事件中<em>event.WindowName</em>是可以获取到鼠标点击处所对应的窗口名字的，但是有的时候在某一个程序的窗口中点击可能会获取不到，这个应该是因为，该程序有子窗体，子窗体没有设置<br>名字，而我的钩子又没办法钩到父级窗口（至少目前我是不知道怎么钩到父级的。如果有人知道，麻烦告诉我一下），所以获取不到程序的名字。而神奇之处在于键盘事件的<em>event.WindowName</em>是无论如果都能获取主程序窗口名字的。<br>我也是搞不懂为什么。</p>
+<p>最后的<em>return True</em>也是非常关键，相当于把消息又从钩子交回去了，这样我们的系统才能。如果是<em>false</em>，则事件会被<br>钩子全部拦截，鼠标键盘就失去响应了。</p>
+<h3 id="C-Hook"><a href="#C-Hook" class="headerlink" title="C++ Hook"></a><a style="color:#AE8D73"><strong>C++ Hook</strong></a></h3><p>C++的方式，我使用的是<em>Windows.h</em>。其实原理大同小异，只是代码量比python多一点。</p>
+<pre><code class="C++">int main()
+{
+    MSG Msg;
+
+    HHOOK keybordHook;
+    HHOOK mouseHook;
+
+    keybordHook = SetWindowsHookEx( 
+            WH_KEYBOARD_LL,     // 监听类型【键盘】
+            KeyboardProc,       // 处理函数
+            NULL,                  // 当前实例句柄
+            NULL                  // 监听窗口句柄(NULL为全局监听)
+            ); 
+    mouseHook = SetWindowsHookEx( 
+            WH_MOUSE_LL,      // 监听类型【鼠标】
+            MouseProc,        // 处理函数
+            NULL,                // 当前实例句柄
+            NULL              // 监听窗口句柄(NULL为全局监听)
+            ); 
+
+    while(GetMessage(&amp;Msg, NULL, 0, 0) &gt; 0)
+    {
+
+        TranslateMessage(&amp;Msg);
+        DispatchMessage(&amp;Msg);
+    }
+    return Msg.wParam;
+}
+</code></pre>
+<p>首先声明两种钩子，对于每种钩子的安装，都是使用<em>SetWindowsHookEx()</em>来处理，其设置方法也比较简单一共四个参数：</p>
+<blockquote>
+<ul>
+<li>钩子监听的消息类型</li>
+<li>响应钩子监听事件的回调处理函数</li>
+<li>应用程序的句柄</li>
+<li>钩子关联的线程标识（NULL就是与所有线程关联，全局监听）</li>
+</ul>
+</blockquote>
+<p>接下来，把消息类型在回调函数中做处理就行了。回调函数的结构为<em>LRESULT CALLBACK HookProc(int nCode, WPARAM wParam, LPARAM lParam)</em>：</p>
+<pre><code class="C++">LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) 
+{   
+    PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT)lParam;
+    const char *info = NULL;
+    char text[50], data[20];
+
+    if (nCode &gt;= 0)
+    {
+        if      (wParam == WM_KEYDOWN)      info = &quot;普通按鍵抬起&quot;;
+        else if (wParam == WM_KEYUP)        info = &quot;普通按鍵按下&quot;;
+        else if (wParam == WM_SYSKEYDOWN)   info = &quot;系統按鍵抬起&quot;;
+        else if (wParam == WM_SYSKEYUP)     info = &quot;系統按鍵按下&quot;;
+
+        ZeroMemory(text, sizeof(text));
+        ZeroMemory(data, sizeof(data));
+
+        wsprintf(text, &quot;%s - 键盘码 [%04d], 扫描码 [%04d]  &quot;, info, p-&gt;vkCode, p-&gt;scanCode);
+        wsprintf(data, &quot;按鍵目測為： %c  &quot;, p-&gt;vkCode);
+    }
+
+    return CallNextHookEx(keybordHook, nCode, wParam, lParam);
+} 
+
+LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam) 
+{   
+    LPMSLLHOOKSTRUCT p = (LPMSLLHOOKSTRUCT)lParam;
+    POINT   pt = p-&gt;pt;
+    DWORD   mouseData = p-&gt;mouseData;
+    const char *info = NULL;
+    char text[60], pData[50], mData[50];
+
+    if (nCode &gt;= 0)
+    {
+        if   (wParam == WM_MOUSEMOVE)       info = &quot;鼠标移动　　　　&quot;;
+        else if(wParam == WM_LBUTTONDOWN)   info = &quot;鼠标【左键】按下&quot;;
+        else if(wParam == WM_LBUTTONUP)     info = &quot;鼠标【左键】抬起&quot;;
+        else if(wParam == WM_LBUTTONDBLCLK) info = &quot;鼠标【左键】双击&quot;;
+        else if(wParam == WM_RBUTTONDOWN)   info = &quot;鼠标【右键】按下&quot;;
+        else if(wParam == WM_RBUTTONUP)     info = &quot;鼠标【右键】抬起&quot;;
+        else if(wParam == WM_RBUTTONDBLCLK) info = &quot;鼠标【右键】双击&quot;;
+        else if(wParam == WM_MBUTTONDOWN)   info = &quot;鼠标【滚轮】按下&quot;;
+        else if(wParam == WM_MBUTTONUP)     info = &quot;鼠标【滚轮】抬起&quot;;
+        else if(wParam == WM_MBUTTONDBLCLK) info = &quot;鼠标【滚轮】双击&quot;;
+        else if(wParam == WM_MOUSEWHEEL)    info = &quot;鼠标【滚轮】滚动&quot;;
+
+        ZeroMemory(text, sizeof(text));
+        ZeroMemory(pData, sizeof(pData));
+        ZeroMemory(mData, sizeof(mData));
+
+        wsprintf( text, &quot;当前状态： %10s   &quot;, info);
+        wsprintf(pData, &quot;0x%x - X: [%04d], Y: [%04d]  &quot;, wParam, pt.x, pt.y);
+        wsprintf(mData, &quot;附带数据： %16u   &quot;, mouseData);
+    }
+
+    return CallNextHookEx(mouseHook, nCode, wParam, lParam);
+}
+</code></pre>
+<p>这里做一个小总结，Windows中的Hook机制如下：</p>
+<blockquote>
+<ul>
+<li>SetWindowsHookEx() 设置好钩子类型与回调函数。</li>
+<li>回调函数处理钩子事件，并且返回CallNextHookEx()。</li>
+<li>CallNextHookEx()设置好消息的下一传递目标。</li>
+</ul>
+</blockquote>
+<h2 id="CPU、内存查看"><a href="#CPU、内存查看" class="headerlink" title="CPU、内存查看"></a><a style="color:#AE8D73"><strong>CPU、内存查看</strong></a></h2><p>获取内存占用率这个没有什么多的知识点，直接放个代码好了：</p>
+<pre><code class="C++">DWORD getWin_MemUsage()
+{  
+    MEMORYSTATUS ms;  
+    ::GlobalMemoryStatus(&amp;ms);
+
+    return ms.dwMemoryLoad;  
+}
+</code></pre>
+<p>计算CPU使用率时候，要先明确一个事情，就是什么是CPU使用率？ 即在任务管理器的刷新周期内CPU忙的时间与整个刷新周期的比值。其中任务管理器默认刷新周期为1s。<br>因此我们有如下公式：</p>
+<pre><code>sysTime = kernel + user
+cpu = (sysTime-idle)*100/sysTime
+cpuidle = idle*100/sysTime
+</code></pre><p>其中，<em>sysTime</em>表示该时间段的CPU总时间，其等于用户态<em>user</em>与内核态<em>kernel</em>时间总和。 <em>idle</em>表示cpu空闲状态时间。而如何获取到时间片段呢？<br>我采用的方法是利用连续两次时间，相减得到时间片段。最后代码如下：</p>
+<pre><code class="C++">__int64 CompareFileTime(FILETIME time1, FILETIME time2)  
+{  
+    __int64 a = time1.dwHighDateTime &lt;&lt; 32 | time1.dwLowDateTime;  
+    __int64 b = time2.dwHighDateTime &lt;&lt; 32 | time2.dwLowDateTime;  
+
+    return (b - a);  
+}
+
+void getWin_CpuMemUsage(){  
+    HANDLE hEvent;  
+    BOOL res;  
+    FILETIME preidleTime;  
+    FILETIME prekernelTime;  
+    FILETIME preuserTime;  
+    FILETIME idleTime;  
+    FILETIME kernelTime;  
+    FILETIME userTime;  
+
+    res = GetSystemTimes(&amp;idleTime, &amp;kernelTime, &amp;userTime);  
+    preidleTime = idleTime;  
+    prekernelTime = kernelTime;  
+    preuserTime = userTime;  
+
+    hEvent = CreateEventA(NULL, FALSE, FALSE, NULL); // 初始值为 nonsignaled ，并且每次触发后自动设置为nonsignaled  
+
+    WaitForSingleObject(hEvent, 1000);  
+    res = GetSystemTimes(&amp;idleTime, &amp;kernelTime, &amp;userTime);  
+
+    __int64 idle = CompareFileTime(preidleTime, idleTime);  
+    __int64 kernel = CompareFileTime(prekernelTime, kernelTime);  
+    __int64 user = CompareFileTime(preuserTime, userTime);  
+
+    __int64 cpu = (kernel + user - idle) * 100 / (kernel + user);  
+    __int64 cpuidle = (idle)* 100 / (kernel + user);  
+
+    cout &lt;&lt; &quot;CPU利用率:&quot; &lt;&lt; cpu &lt;&lt; &quot;%&quot; &lt;&lt; &quot; CPU空闲率:&quot; &lt;&lt; cpuidle &lt;&lt; &quot;%&quot; &lt;&lt; endl;  
+
+    preidleTime = idleTime;  
+    prekernelTime = kernelTime;  
+    preuserTime = userTime; 
+}
+</code></pre>
+<h2 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a><a style="color:#AE8D73"><strong>守护进程</strong></a></h2><p>之前在网上找了好多方法，又是要获取进程id，又是要创建子进程的。反正一堆乱七八糟，看得我晕得很，就放弃了。最后决定采取的方案是，对windows的进程列表做快照，发现没有目标程序，就直接调用<em>WinExec()</em>给它启动起来。</p>
+<pre><code class="C++">#include &lt;Tlhelp32.h&gt;
+#include &lt;shellapi.h&gt;
+void EnumProc()
+{
+    PROCESSENTRY32 pe32;
+    pe32.dwSize=sizeof(PROCESSENTRY32);
+    BOOL bRet;
+    HANDLE hProcessSnap=CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS,NULL);
+
+    bRet=Process32First(hProcessSnap,&amp;pe32);
+
+    BOOL flag=0;
+
+    while(bRet)
+    {
+        bRet=Process32Next(hProcessSnap,&amp;pe32);
+        string task=pe32.szExeFile;
+        if(task==&quot;notepad.exe&quot;)
+        {
+            flag=1;
+        }
+    }
+
+    if (flag==0)
+    {
+        WinExec(&quot;notepad.exe&quot;,SW_SHOWMAXIMIZED);
+    }
+}
+</code></pre>
+<h2 id="C-11-线程"><a href="#C-11-线程" class="headerlink" title="C++ 11 线程"></a><a style="color:#AE8D73"><strong>C++ 11 线程</strong></a></h2><p>这次发现C++ 11的线程机制非常好用，可以自定义线程函数了，所以总结一下。</p>
+<blockquote>
+<ul>
+<li>声明线程并指明回调函数</li>
+<li>以结合（join）或者分离（detach）的方式启用线程</li>
+</ul>
+</blockquote>
+<pre><code class="C++">#include &lt;thread&gt;
+#include &lt;iostream&gt;
+#include &lt;mutex&gt; 
+using namespace std;
+
+void HookProc()
+{
+    cout&lt;&lt;&quot;hook&quot;&lt;&lt;endl;
+    std::this_thread::sleep_for (chrono::seconds(10));
+}
+void SystemUsageProc()
+{
+    cout&lt;&lt;&quot;SystemUse&quot;&lt;&lt;endl;
+    std::this_thread::sleep_for (chrono::seconds(5));
+}
+
+int main()
+{
+    std::thread hookEvent(HookProc);
+    std::thread systemUsage(SystemUsageProc);
+
+    hookEvent.join();
+    systemUsage.join();
+
+    //hookEvent.detach();
+    //systemUsage.detach();
+
+    return 0;
+}
+</code></pre>
+<p>另外，包含了<strong><mutex></mutex></strong>之后可以使用锁机制，对共享数据做加锁的操作。其使用方法是对共享数据前后使用：</p>
+<pre><code class="C++">std::mutex t_lock;
+
+t_lock.lock();
+//操作共享数据
+t_lock.unlock();
+</code></pre>
+<h2 id="time-t与string互转"><a href="#time-t与string互转" class="headerlink" title="time_t与string互转"></a><a style="color:#AE8D73"><strong>time_t与string互转</strong></a></h2><p>最后，记录一下几个用到的工具。</p>
+<pre><code class="C++">//time_t 转 &quot;%Y/%m/%d-%H:%M:%S&quot;
+string time2String(time_t time)
+{
+    char buff[20];
+    strftime(buff,20, &quot;%Y/%m/%d-%H:%M:%S&quot;, localtime(&amp;time));
+    string timeStr=buff;
+    return timeStr;
+}
+
+// &quot;%Y/%m/%d-%H:%M:%S&quot; 转time_t
+time_t string2Time(const std::string &amp; tstring)  
+{  
+    struct tm tm1;  
+    time_t time1; 
+    string tmp=tstring;
+    int i = sscanf(tmp.c_str(), &quot;%d/%d/%d-%d:%d:%d&quot; ,       
+        &amp;(tm1.tm_year),   
+        &amp;(tm1.tm_mon),   
+        &amp;(tm1.tm_mday),  
+        &amp;(tm1.tm_hour),  
+        &amp;(tm1.tm_min),  
+        &amp;(tm1.tm_sec),  
+        &amp;(tm1.tm_wday),  
+        &amp;(tm1.tm_yday));  
+
+    tm1.tm_year -= 1900;  
+    tm1.tm_mon --;  
+    tm1.tm_isdst=-1;  
+    time1 = mktime(&amp;tm1);  
+
+    return time1; 
+
+}
+</code></pre>
+<p>over，先记录这么多。以后用不用得到再说。</p>
+
+					</div>
+					
+					
+					<p></p>
+					<div class="denote">
+						<div>
+							<img onclick="load_pic()" id="aliqcode" class="denote_img img-responsive center-block" src="" />
+						</div>
+						<a class="donate_btn" id="donate_btn" onclick="load_pic()" >￥ Donate me.</a>
+					</div>
+					<p></p>
+					<!--share-->
+					<div class="ds-share flat" data-thread-key="post-2016/11/03/Windows事件监控/-Windows事件监控" data-title="Windows事件监控" data-images="" data-content="" data-url="http://www.bigbai.com.cn/2016/11/03/Windows事件监控/">
+						<div class="ds-share-inline">
+							<div class="ds-share-icons-more">
+							</div>
+							<ul  class="ds-share-icons-16">		
+								<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">Share: </a></li>
+								<li> <a class="ds-wechat" href="javascript:void(0);" data-service="wechat">&nbsp</a> </li>
+								<li> <a class="ds-weibo" href="javascript:void(0);" data-service="weibo">&nbsp</a> </li>
+								<li> <a class="ds-facebook" href="javascript:void(0);" data-service="facebook">&nbsp</a> </li> 
+								<li> <a class="ds-twitter" href="javascript:void(0);" data-service="twitter">&nbsp</a> </li>
+								
+							</ul>
+							
+						</div>
+					 </div>
+					 <!--END SHARE-->
+
+
+					<!-- 多说评论框 start -->
+						<div class="ds-thread" data-thread-key="post-2016/11/03/Windows事件监控/-Windows事件监控" data-title="Windows事件监控" data-url="http://www.bigbai.com.cn/2016/11/03/Windows事件监控/"></div>
+						<!-- 多说评论框 end -->
+						<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+						<script type="text/javascript">
+							var duoshuoQuery = {short_name:"bigbai"};
+								(function() {
+									var ds = document.createElement('script');
+									ds.type = 'text/javascript';ds.async = true;
+									ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+									ds.charset = 'UTF-8';
+									(document.getElementsByTagName('head')[0] 
+									 || document.getElementsByTagName('body')[0]).appendChild(ds);
+								})();
+						</script>
+					<!-- 多说公共JS代码 end -->
+				</div>
+			</div>	
+		</div>
+		<!-- SIDE BAR -->
+<div class="col-md-3 sidebar">
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Categories
+				</h3>
+				<ul>
+					<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Interesting-Trick/">Interesting Trick</a><span class="category-list-count">2</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Tags
+				</h3
+				<ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Archives
+				</h3
+				<ul>
+					<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">2</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+			
+	</div>
+</section>
+
+		</div>
+		
+	</div>
+	<div>
+		<!-- BEGIN FOOTER -->
+<footer>
+	<div class="row">
+		<div class="col-md-12">
+			<p style="margin-bottom: 0">
+				© 2016 Designed by BIGBAI. Adapted to <a href="https://hexo.io/"> Hexo</a>
+			</p>             
+			<p >
+				-Friend：<a href="http://blackpoint-cx.github.io">BlackPoint</a>- 
+			</p>
+		</div>
+	</div>
+</footer>
+<!-- END FOOTER -->
+
+
+
+<!-- Back to top -->
+<div id="backtotop">       
+	<a class="to-top-btn sscroll" href="#top"><i class="fa fa-angle-double-up"></i></a>
+</div>
+	</div>
+
+    <!-- Library Scripts -->
+	<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/lib/jquery.preloader.js"></script>
+<script src="/js/lib/nivo-lightbox.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lib/jquery.superslides.min.js"></script>
+<script src="/js/lib/smoothscroll.js"></script>
+<!--<script src="/js/lib/jquery.sudoslider.min.js"></script>-->
+<script src="/js/lib/jquery.bxslider.min.js"></script>
+<script src="/js/lib/jquery.mixitup.min.js"></script>
+<script src="/js/lib/jquery.backtotop.js"></script>
+<script src="/js/lib/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script src="/js/lib/retina.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<!-- Custom Script -->    
+<script src="/js/main.js"></script>
+
+<script>
+	function load_pic(){
+		var imgObj = document.getElementById("aliqcode");
+		var Flag=(imgObj.getAttribute("src",2)=="/images/wechat.jpg")
+		imgObj.src=Flag?"":"/images/wechat.jpg";
+		
+		var textObj = document.getElementById("donate_btn");
+		if(textObj.innerHTML =="Scan WeChat QR Code")
+		{
+			textObj.innerHTML ="￥ Donate me.";
+		}
+		else
+		{
+			textObj.innerHTML ="Scan WeChat QR Code";
+		}
+	}
+</script>
+</body>
+
+</html>
