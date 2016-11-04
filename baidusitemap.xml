@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://www.bigbai.com.cn/2016/11/03/Windows%E4%BA%8B%E4%BB%B6%E7%9B%91%E6%8E%A7/</loc>
+    <lastmod>2016-11-04T05:11:32.217Z</lastmod>
+    <data>
+        <display>
+        <title>Windows事件监控</title>
+        <pubTime>2016-11-03T07:30:06.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="Interesting Trick" url="http://www.bigbai.com.cn/categories/Interesting-Trick/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.bigbai.com.cn/2016/11/01/BIGBAI%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87/</loc>
+    <lastmod>2016-11-03T12:25:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>BIGBAI的第一篇</title>
+        <pubTime>2016-11-01T08:38:35.000Z</pubTime>
+        
+        <tag>Hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="Interesting Trick" url="http://www.bigbai.com.cn/categories/Interesting-Trick/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+</urlset>

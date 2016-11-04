@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="baidu-site-verification" content="MmSp9r4WgS" />
+    <meta name="baidu-site-verification" content="MmSp9r4WgS" />
+    <meta name="google-site-verification" content="5qg7SdWiFgE02QeLILrFWE25WewlG8uqdAIBMgYwn8Q" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -115,10 +116,11 @@
 						
 						
 						<!-- toc -->
-<p>最近的工作中，有个需求，需要监控用户使用Windows电脑时候的鼠标键盘事件、cpu内存使用量、以及守护另外一个程序。涉及到的一些知识，个人觉得除非以后要写个外挂、流氓软件、或者是盗号软件，应该以后都不会用到了。<br>但是个人觉得还是记录下来一些比较好，万一以后要用到还忘记了，就TM尴尬了。难说以后混不下去了，还可以去盗号赚点生活费什么的。</p>
+<p>最近的工作中，有个需求，需要监控用户使用Windows电脑时候的鼠标键盘事件、cpu内存使用量、以及守护另外一个程序。涉及到的一些知识，个人觉得除非以后要写个外挂、流氓软件、或者是盗号软件，应该以后都不会用到了。</p>
+<p>但是个人觉得还是记录下来一些比较好，万一以后要用到还忘记了，就TM尴尬了。难说以后混不下去了，还可以去盗号赚点生活费什么的。</p>
 <a id="more"></a>
 <h2 id="Windows鼠标键盘Hook"><a href="#Windows鼠标键盘Hook" class="headerlink" title="Windows鼠标键盘Hook"></a><a style="color:#AE8D73"><strong>Windows鼠标键盘Hook</strong></a></h2><p>这部分本来使用PyHook做的，因为用python写起来比较简单。后来由于项目需要，改成用C++了。但是还是决定把pyHook的方法记录一下，免得以后找起来麻烦。</p>
-<h3 id="pyHook"><a href="#pyHook" class="headerlink" title="pyHook"></a><a style="color:#AE8D73"><strong>pyHook</strong></a></h3><p>首先，肯定是要安装好<a href="http://sourceforge.net/projects/pyhook/files/pyhook/1.5.1/" target="_blank" rel="external">pyHook</a>和<a href="https://sourceforge.net/projects/pywin32/" target="_blank" rel="external">pywin32</a>。毕竟需要调用的其实还是windows API。<br>之后代码就非常简单了，在<em>import pythoncom 和 import pyHook </em>之后：</p>
+<h3 id="pyHook"><a href="#pyHook" class="headerlink" title="pyHook"></a><a style="color:#AE8D73"><strong>pyHook</strong></a></h3><p>首先，肯定是要安装好<a href="http://sourceforge.net/projects/pyhook/files/pyhook/1.5.1/" target="_blank" rel="external">pyHook</a>和<a href="https://sourceforge.net/projects/pywin32/" target="_blank" rel="external">pywin32</a>。毕竟需要调用的其实还是windows API。之后代码就非常简单了，在<em>import pythoncom 和 import pyHook </em>之后：</p>
 <pre><code class="python">if __name__==&#39;__main__&#39;:
     hm = pyHook.HookManager() 
 
@@ -129,7 +131,7 @@
 
     pythoncom.PumpMessages()
 </code></pre>
-<p>以上创建了pyHook的句柄hm之后，剩下的其实就是两句话： 1.设置好回调函数<em>onKeyboardEvent()</em>和<em>onMouseEvent()</em>；2.挂上钩子<em>HookKeyboard()</em>和<em>HookMouse()</em>。<br>然后在回调函数里就可以查看的需要的各种监听信息了。针对不同的程序功能，可以自己筛选需要的信息处理。</p>
+<p>以上创建了pyHook的句柄hm之后，剩下的其实就是两句话： 1.设置好回调函数<em>onKeyboardEvent()</em>和<em>onMouseEvent()</em>；2.挂上钩子<em>HookKeyboard()</em>和<em>HookMouse()</em>。然后在回调函数里就可以查看的需要的各种监听信息了。针对不同的程序功能，可以自己筛选需要的信息处理。</p>
 <pre><code class="python">def onMouseEvent(event):
     print &quot;MessageName:&quot;,event.MessageName
     print &quot;Message:&quot;, event.Message
@@ -159,8 +161,8 @@
 
     return True
 </code></pre>
-<p>这里有一个很神奇的地方，鼠标事件中<em>event.WindowName</em>是可以获取到鼠标点击处所对应的窗口名字的，但是有的时候在某一个程序的窗口中点击可能会获取不到，这个应该是因为，该程序有子窗体，子窗体没有设置<br>名字，而我的钩子又没办法钩到父级窗口（至少目前我是不知道怎么钩到父级的。如果有人知道，麻烦告诉我一下），所以获取不到程序的名字。而神奇之处在于键盘事件的<em>event.WindowName</em>是无论如果都能获取主程序窗口名字的。<br>我也是搞不懂为什么。</p>
-<p>最后的<em>return True</em>也是非常关键，相当于把消息又从钩子交回去了，这样我们的系统才能。如果是<em>false</em>，则事件会被<br>钩子全部拦截，鼠标键盘就失去响应了。</p>
+<p>这里有一个很神奇的地方，鼠标事件中<em>event.WindowName</em>是可以获取到鼠标点击处所对应的窗口名字的，但是有的时候在某一个程序的窗口中点击可能会获取不到，这个应该是因为，该程序有子窗体，子窗体没有设置名字，而我的钩子又没办法钩到父级窗口（至少目前我是不知道怎么钩到父级的。如果有人知道，麻烦告诉我一下），所以获取不到程序的名字。而神奇之处在于键盘事件的<em>event.WindowName</em>是无论如果都能获取主程序窗口名字的。我也是搞不懂为什么。</p>
+<p>最后的<em>return True</em>也是非常关键，相当于把消息又从钩子交回去了，这样我们的系统才能。如果是<em>false</em>，则事件会被钩子全部拦截，鼠标键盘就失去响应了。</p>
 <h3 id="C-Hook"><a href="#C-Hook" class="headerlink" title="C++ Hook"></a><a style="color:#AE8D73"><strong>C++ Hook</strong></a></h3><p>C++的方式，我使用的是<em>Windows.h</em>。其实原理大同小异，只是代码量比python多一点。</p>
 <pre><code class="C++">int main()
 {
@@ -275,11 +277,11 @@ LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam)
     return ms.dwMemoryLoad;  
 }
 </code></pre>
-<p>计算CPU使用率时候，要先明确一个事情，就是什么是CPU使用率？ 即在任务管理器的刷新周期内CPU忙的时间与整个刷新周期的比值。其中任务管理器默认刷新周期为1s。<br>因此我们有如下公式：</p>
+<p>计算CPU使用率时候，要先明确一个事情，就是什么是CPU使用率？ 即在任务管理器的刷新周期内CPU忙的时间与整个刷新周期的比值。其中任务管理器默认刷新周期为1s。因此我们有如下公式：</p>
 <pre><code>sysTime = kernel + user
 cpu = (sysTime-idle)*100/sysTime
 cpuidle = idle*100/sysTime
-</code></pre><p>其中，<em>sysTime</em>表示该时间段的CPU总时间，其等于用户态<em>user</em>与内核态<em>kernel</em>时间总和。 <em>idle</em>表示cpu空闲状态时间。而如何获取到时间片段呢？<br>我采用的方法是利用连续两次时间，相减得到时间片段。最后代码如下：</p>
+</code></pre><p>其中，<em>sysTime</em>表示该时间段的CPU总时间，其等于用户态<em>user</em>与内核态<em>kernel</em>时间总和。 <em>idle</em>表示cpu空闲状态时间。而如何获取到时间片段呢？我采用的方法是利用连续两次时间，相减得到时间片段。最后代码如下：</p>
 <pre><code class="C++">__int64 CompareFileTime(FILETIME time1, FILETIME time2)  
 {  
     __int64 a = time1.dwHighDateTime &lt;&lt; 32 | time1.dwLowDateTime;  
@@ -389,7 +391,7 @@ int main()
     return 0;
 }
 </code></pre>
-<p>另外，包含了<strong><mutex></mutex></strong>之后可以使用锁机制，对共享数据做加锁的操作。其使用方法是对共享数据前后使用：</p>
+<p>另外，包含了mutex之后可以使用锁机制，对共享数据做加锁的操作。其使用方法是对共享数据前后使用：</p>
 <pre><code class="C++">std::mutex t_lock;
 
 t_lock.lock();
