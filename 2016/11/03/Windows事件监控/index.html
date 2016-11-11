@@ -162,7 +162,7 @@
     return True
 </code></pre>
 <p>这里有一个很神奇的地方，鼠标事件中<em>event.WindowName</em>是可以获取到鼠标点击处所对应的窗口名字的，但是有的时候在某一个程序的窗口中点击可能会获取不到，这个应该是因为，该程序有子窗体，子窗体没有设置名字，而我的钩子又没办法钩到父级窗口（至少目前我是不知道怎么钩到父级的。如果有人知道，麻烦告诉我一下），所以获取不到程序的名字。而神奇之处在于键盘事件的<em>event.WindowName</em>是无论如果都能获取主程序窗口名字的。我也是搞不懂为什么。</p>
-<p>最后的<em>return True</em>也是非常关键，相当于把消息又从钩子交回去了，这样我们的系统才能。如果是<em>false</em>，则事件会被钩子全部拦截，鼠标键盘就失去响应了。</p>
+<p>最后的<em>return True</em>也是非常关键，相当于把消息又从钩子交回去了，这样我们的系统才能继续按原逻辑执行。如果是<em>false</em>，则事件会被钩子全部拦截，鼠标键盘就失去响应了。</p>
 <h3 id="C-Hook"><a href="#C-Hook" class="headerlink" title="C++ Hook"></a><a style="color:#AE8D73"><strong>C++ Hook</strong></a></h3><p>C++的方式，我使用的是<em>Windows.h</em>。其实原理大同小异，只是代码量比python多一点。</p>
 <pre><code class="C++">int main()
 {
