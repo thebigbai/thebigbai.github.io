@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="baidu-site-verification" content="MmSp9r4WgS" />
+    <meta name="google-site-verification" content="5qg7SdWiFgE02QeLILrFWE25WewlG8uqdAIBMgYwn8Q" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/darcula.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/favicon/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/images/favicon/favicon.png" type="image/x-icon">
+
+    <title>The BIGBAI</title>
+	
+    <!--Library Styles-->    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/lib/font-awesome.css" rel="stylesheet">
+    <link href="/css/lib/nivo-lightbox.css" rel="stylesheet">
+    <link href="/css/lib/nivo-themes/default/default.css" rel="stylesheet">
+	
+    <!--Template Styles-->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/scheme/purple.css" rel="stylesheet">
+
+
+
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+      <script src="/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body data-spy="scroll" id="top">
+	<div id="main-wrapper">
+		<!-- Site Navigation -->
+		<div id="menu">
+	<nav class="navbar navbar-default" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html#">
+				<img src="/images/logo.png" alt="logo">
+			</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-navbar-collapse">
+			<ul class="nav navbar-nav">
+				
+					<li><a class="nav-font-size" href="/">Home</a></li>
+				
+					<li><a class="nav-font-size" href="/archives">Archives</a></li>
+				
+					<li><a class="nav-font-size" href="/about">About</a></li>
+				
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</nav>
+</div>
+
+	  
+		<div id="container" style="max-width:100%;">
+			<section id="blog-full" class="blog">
+	<div class="row">
+		<div class="col-md-9">
+			<div id="primary" class="row">
+				<div class="blog-post">
+					<!-- Title -->
+					<h2 class="post-title">
+						<a class="article-full-color">
+							Step to Docker
+						</a>
+					</h2>
+					
+					<!-- Tags and Categories links -->
+					
+					
+
+<div class="blog-tags-container">
+    <span class="glyphicon glyphicon-tags"></span>
+    <a href="/tags/Docker/">#Docker</a>
+</div>
+
+				
+					
+
+<div class="blog-categories-container">
+    <span class="glyphicon glyphicon-folder-open"></span>
+    <a href="/categories/Big-Data/">Big Data</a>
+</div>
+
+
+					<!-- Date and Author -->
+					<p class="post-meta">
+						2016-11-10
+						
+					</p>
+
+					<!-- Content -->
+					<div id="2016-11-10" class="post-content content_align">
+					
+						<!-- Table of Contents -->
+						
+						<div id="toc" class="toc-article">
+							<strong class="toc-title">Table of Content</strong>
+							<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-Installation"><span class="toc-text">Docker Installation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Image"><span class="toc-text">Image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Container"><span class="toc-text">Container</span></a></li></ol>
+						</div>
+						
+						
+						
+						<!-- toc -->
+<p>Recently, I start to touch the <a href="http://www.docker.com/" target="_blank" rel="external">Docker</a> technology as I had a idea with some of my friends that we want to run Spark on Docker. The reason that this blog written in English is that I run Docker on Ubuntu and there is <a style="color: #CD661D">no chinese input method installed</a>.</p>
+<a id="more"></a>
+<h2 id="Docker-Installation"><a href="#Docker-Installation" class="headerlink" title="Docker Installation"></a><a style="color:#AE8D73"><strong>Docker Installation</strong></a></h2><p>I installed docker using the official source. In the beginning, we need to ensure that our ubuntu apt-get is <a style="color: #CD661D">up to date</a>.</p>
+<pre><code>sudo apt-get update
+</code></pre><p>It is noteworthy that if we can not update the apt-get, we may be blocked by the firewall. we can apply a proxy before using the apt-get:</p>
+<pre><code>export http_proxy=&quot;http://user:pwd@proxyIP:port&quot;
+</code></pre><p>Or we can try to download from other ubuntu source. Open the <em>software &amp; update</em>, select the <em>best server</em> in <em>“download from”</em>. After updating, we can start to install the <em>apt-transport-https</em>:</p>
+<pre><code>sudo apt-get install apt-transport-https
+</code></pre><p>Then add the Docker repository key in our local machine:</p>
+<pre><code>sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+</code></pre><p>The next step, add the docker official source to our source list:</p>
+<pre><code>sudo bash -c &quot;echo deb https://get.docker.io/ubuntu docker main &gt; /etc/apt/sources.list.d/docker.list&quot;
+</code></pre><p>then update apt-get again:</p>
+<pre><code>sudo apt-get update
+</code></pre><p>If all the steps above are ok, the docker will be installed by:</p>
+<pre><code>sudo apt-get install -y lxc-docker
+</code></pre><p>It would be a while before installation completed. When it done, we can see the docker version, the status of docker service, and turn on or turn off the docker service:</p>
+<pre><code>sudo docker -v
+sudo service docker status
+sudo service docker start
+sudo service docker stop
+sudo service docker restart
+</code></pre><p>In the future, if we need keep the version the same up to date, we can update docker to latest version via:</p>
+<pre><code>sudo apt-get update -y lxc-docker
+</code></pre><h2 id="Image"><a href="#Image" class="headerlink" title="Image"></a><a style="color:#AE8D73"><strong>Image</strong></a></h2><p>After we installed the docker, we can use docker to pull the image you want. Usualy, we pull images from the <a href="https://hub.docker.com/" target="_blank" rel="external">Docker Hub</a>. we can search the the image term via the formated command： <strong>“docker search TERM”</strong>. In my case, I search for a Ubuntu image:</p>
+<pre><code>sodu docker search ubuntu
+</code></pre><p>Then, we can find many types of ubuntu listed. To pull the image using the command <strong>“docker pull NAME[:TAG]”</strong>.</p>
+<pre><code>sudo docker pull ubuntu:latest
+</code></pre><p>if download successfully, we now get the ubuntu image with the <strong>latest</strong> tag. We can see all the images on our local machine by:</p>
+<pre><code>sudo docker images
+</code></pre><p>It lists as:</p>
+<pre><code>REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+ubuntu              latest              88f79970fa20        3 weeks ago         127.2 MB
+</code></pre><p>If we want to see the detail information of the image or want to remove the image, use the command:</p>
+<pre><code>sudo docker inspect NAME
+sudo docker rmi NAME
+</code></pre><h2 id="Container"><a href="#Container" class="headerlink" title="Container"></a><a style="color:#AE8D73"><strong>Container</strong></a></h2><p>Next, we can create container runing on the image we have pulled. For example, we create a container named BIGBAI and start it:</p>
+<pre><code>sudo docker create -it --name BIGBAI ubuntu:latest
+sudo docker start BIGBAI
+</code></pre><p>To see all the container:</p>
+<pre><code>sudo docker ps -a
+</code></pre><p>We can access a container to manipulate by <strong>“attach”</strong> command. for exmaple:</p>
+<pre><code>sudo docker attach BIGBAI
+</code></pre><p>then we can use the bash in the container named BIGBAI. To simplify above manipulation, we also can use <strong>“run”</strong> command to create and start a container and access it immediately.</p>
+<pre><code>sudo docker run -it --name BIGBAI ubuntu:lastest
+</code></pre><p>in this case, we are <a style="color: #CD661D">already</a> in ubuntu bash in BIGBAI container. So the <strong>“run”</strong> can be seen as excuting <strong>“create”</strong> firstly and then excuting <strong>“start”</strong>. We can remove a container if its status is <strong>“exited”</strong>. So we need to <a style="color: #CD661D">stop the container first</a> then remove it.</p>
+<pre><code>sudo docker stop BIGBAI
+sudo docker rm BIGBAI
+</code></pre><p>OR, we can remove it with force :</p>
+<pre><code>sudo docker rm -f BIGBAI
+</code></pre><p>Ok, so much for today.</p>
+<!-- more -->
+					</div>
+					
+					
+					<p></p>
+					<div class="denote">
+						<div>
+							<img onclick="load_pic()" id="aliqcode" class="denote_img img-responsive center-block" src="" />
+						</div>
+						<a class="donate_btn" id="donate_btn" onclick="load_pic()" >￥ Donate me.</a>
+					</div>
+					<p></p>
+					<!--share-->
+					<div class="ds-share flat" data-thread-key="post-2016/11/10/step-to-docker/-step-to-docker" data-title="Step to Docker" data-images="" data-content="" data-url="http://www.bigbai.com.cn/2016/11/10/step-to-docker/">
+						<div class="ds-share-inline">
+							<div class="ds-share-icons-more">
+							</div>
+							<ul  class="ds-share-icons-16">		
+								<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">Share: </a></li>
+								<li> <a class="ds-wechat" href="javascript:void(0);" data-service="wechat">&nbsp</a> </li>
+								<li> <a class="ds-weibo" href="javascript:void(0);" data-service="weibo">&nbsp</a> </li>
+								<li> <a class="ds-facebook" href="javascript:void(0);" data-service="facebook">&nbsp</a> </li> 
+								<li> <a class="ds-twitter" href="javascript:void(0);" data-service="twitter">&nbsp</a> </li>
+								
+							</ul>
+							
+						</div>
+					 </div>
+					 <!--END SHARE-->
+
+
+					<!-- 多说评论框 start -->
+						<div class="ds-thread" data-thread-key="post-2016/11/10/step-to-docker/-step-to-docker" data-title="Step to Docker" data-url="http://www.bigbai.com.cn/2016/11/10/step-to-docker/"></div>
+						<!-- 多说评论框 end -->
+						<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+						<script type="text/javascript">
+							var duoshuoQuery = {short_name:"bigbai"};
+								(function() {
+									var ds = document.createElement('script');
+									ds.type = 'text/javascript';ds.async = true;
+									ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+									ds.charset = 'UTF-8';
+									(document.getElementsByTagName('head')[0] 
+									 || document.getElementsByTagName('body')[0]).appendChild(ds);
+								})();
+						</script>
+					<!-- 多说公共JS代码 end -->
+				</div>
+			</div>	
+		</div>
+		<!-- SIDE BAR -->
+<div class="col-md-3 sidebar">
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Categories
+				</h3>
+				<ul>
+					<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Big-Data/">Big Data</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interesting-Trick/">Interesting Trick</a><span class="category-list-count">2</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Tags
+				</h3
+				<ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Archives
+				</h3
+				<ul>
+					<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">3</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+			
+	</div>
+</section>
+
+		</div>
+		
+	</div>
+	<div>
+		<!-- BEGIN FOOTER -->
+<footer>
+	<div class="row">
+		<div class="col-md-12">
+			<p style="margin-bottom: 0">
+				© 2016 Designed by BIGBAI. Adapted to <a href="https://hexo.io/"> Hexo</a>
+			</p>             
+			<p >
+				-Friend：<a href="http://blackpoint-cx.github.io">BlackPoint</a>- 
+			</p>
+		</div>
+	</div>
+</footer>
+<!-- END FOOTER -->
+
+
+
+<!-- Back to top -->
+<div id="backtotop">       
+	<a class="to-top-btn sscroll" href="#top"><i class="fa fa-angle-double-up"></i></a>
+</div>
+	</div>
+
+    <!-- Library Scripts -->
+	<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/lib/jquery.preloader.js"></script>
+<script src="/js/lib/nivo-lightbox.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lib/jquery.superslides.min.js"></script>
+<script src="/js/lib/smoothscroll.js"></script>
+<!--<script src="/js/lib/jquery.sudoslider.min.js"></script>-->
+<script src="/js/lib/jquery.bxslider.min.js"></script>
+<script src="/js/lib/jquery.mixitup.min.js"></script>
+<script src="/js/lib/jquery.backtotop.js"></script>
+<script src="/js/lib/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script src="/js/lib/retina.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<!-- Custom Script -->    
+<script src="/js/main.js"></script>
+
+<script>
+	function load_pic(){
+		var imgObj = document.getElementById("aliqcode");
+		var Flag=(imgObj.getAttribute("src",2)=="/images/wechat.jpg")
+		imgObj.src=Flag?"":"/images/wechat.jpg";
+		
+		var textObj = document.getElementById("donate_btn");
+		if(textObj.innerHTML =="Scan WeChat QR Code")
+		{
+			textObj.innerHTML ="￥ Donate me.";
+		}
+		else
+		{
+			textObj.innerHTML ="Scan WeChat QR Code";
+		}
+	}
+</script>
+</body>
+
+</html>
