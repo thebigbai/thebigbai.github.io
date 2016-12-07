@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="baidu-site-verification" content="IPMJn3GbW9" />
+    <meta name="google-site-verification" content="5qg7SdWiFgE02QeLILrFWE25WewlG8uqdAIBMgYwn8Q" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/darcula.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/favicon/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/images/favicon/favicon.png" type="image/x-icon">
+
+    <title>The BIGBAI</title>
+	
+    <!--Library Styles-->    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/lib/font-awesome.css" rel="stylesheet">
+    <link href="/css/lib/nivo-lightbox.css" rel="stylesheet">
+    <link href="/css/lib/nivo-themes/default/default.css" rel="stylesheet">
+	
+    <!--Template Styles-->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/scheme/purple.css" rel="stylesheet">
+
+
+
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+      <script src="/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body data-spy="scroll" id="top">
+	<div id="main-wrapper">
+		<!-- Site Navigation -->
+		<div id="menu">
+	<nav class="navbar navbar-default" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html#">
+				<img src="/images/logo.png" alt="logo">
+			</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-navbar-collapse">
+			<ul class="nav navbar-nav">
+				
+					<li><a class="nav-font-size" href="/">Home</a></li>
+				
+					<li><a class="nav-font-size" href="/archives">Archives</a></li>
+				
+					<li><a class="nav-font-size" href="/about">About</a></li>
+				
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</nav>
+</div>
+
+	  
+		<div id="container" style="max-width:100%;">
+			<section id="blog-full" class="blog">
+	<div class="row">
+		<div class="col-md-9">
+			<div id="primary" class="row">
+				<div class="blog-post">
+					<!-- Title -->
+					<h2 class="post-title">
+						<a class="article-full-color">
+							Python彩色图像数字水印来一发
+						</a>
+					</h2>
+					
+					<!-- Tags and Categories links -->
+					
+					
+
+<div class="blog-tags-container">
+    <span class="glyphicon glyphicon-tags"></span>
+    <a href="/tags/Vision/">#Vision</a>
+</div>
+
+				
+					
+
+<div class="blog-categories-container">
+    <span class="glyphicon glyphicon-folder-open"></span>
+    <a href="/categories/Interesting-Trick/">Interesting Trick</a>
+</div>
+
+
+					<!-- Date and Author -->
+					<p class="post-meta">
+						2016-12-06
+						
+					</p>
+
+					<!-- Content -->
+					<div id="2016-12-06" class="post-content content_align">
+					
+						<!-- Table of Contents -->
+						
+						<div id="toc" class="toc-article">
+							<strong class="toc-title">Table of Content</strong>
+							<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑流程"><span class="toc-text">逻辑流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#水印嵌入"><span class="toc-text">水印嵌入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DCT变换"><span class="toc-text">DCT变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#水印图案处理"><span class="toc-text">水印图案处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#嵌入水印"><span class="toc-text">嵌入水印</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#水印提取"><span class="toc-text">水印提取</span></a></li></ol>
+						</div>
+						
+						
+						
+						<!-- toc -->
+<p><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><br>近来，一神奇友人与我提起，欲藏信息于图像，以作拷贝追踪之用也。大致为加一层肉眼不可见，然可以检测出来之标识，亦称为数字水印技术。之前虽未涉猎，然觉得有趣，遂决定尝试一番。同月，<a href="http://www.sarft.gov.cn/art/2016/12/1/art_114_32112.html" target="_blank" rel="external">广电总局居然也和NexGuard签署了水印保护协议</a>，本人不才，目前也是影视技术研发一员，顿觉此技术约莫也是有用的，何须耗费财力于外邦也？摸索三日，得一粗陋之结果，虽觉毫无创新之处，然也有所得，遂记之~<br><a id="more"></a></p>
+<h2 id="逻辑流程"><a href="#逻辑流程" class="headerlink" title="逻辑流程"></a><a style="color:#AE8D73"><strong>逻辑流程</strong></a></h2><p>数字水印的意义在于，一般都是通过在图像的频域上进行操作，隐藏性特别好。相当于把水印的空间域信息加到了原图的频域信号上。而且在低频上加载几乎不影响原始图像的空间域信息，肉眼识别度非常低。查了一些网上的资料，大多都是通过<strong>matlab</strong>实现的，我觉得matlab实用性不高，因此想用<strong>openCV</strong>，但是<strong>C++</strong>又太啰嗦，只是玩玩而已，不要太认真。于是最后决定用<strong>Python</strong>下的<strong>openCV</strong>在图像的频域实现的。<a style="color: #CD661D">因此需要先安装好<strong>OpenCV</strong>和<strong>numpy</strong></a>。其大致流程很简单：</p>
+<blockquote>
+<ul>
+<li>将原始图像变换到频域，比如通过离散余弦变换，傅里叶变换等。</li>
+<li>将水印图案做混淆处理之后，加入到原图像的频域系数中。</li>
+<li>逆变换行程带有数字水印的图像</li>
+</ul>
+</blockquote>
+<p>相应的提取流程：</p>
+<blockquote>
+<ul>
+<li>将含有水印的待检测图像和原始图像同时变换到频域。</li>
+<li>根据原来的嵌入方式，逆向求出混淆以后的水印。</li>
+<li>还原混淆的水印图案。</li>
+</ul>
+</blockquote>
+<h2 id="水印嵌入"><a href="#水印嵌入" class="headerlink" title="水印嵌入"></a><a style="color:#AE8D73"><strong>水印嵌入</strong></a></h2><h3 id="DCT变换"><a href="#DCT变换" class="headerlink" title="DCT变换"></a><a style="color:#AE8D73"><strong>DCT变换</strong></a></h3><p>DCT变换，多的就不说了，具体可以<a href="https://users.cs.cf.ac.uk/Dave.Marshall/Multimedia/node231.html" target="_blank" rel="external">参详此处</a>。由于是彩色图像，我采取的一个简单的方法就是提取RGB分量中的B分量，作为欲加载水印的地方，这是由于人眼在RGB中，对B分量敏感度较低，也是为了做起来比较简单。$$I_{b}(i,j)=I(i,j,b)$$<br>之后通过DCT变换，将其变换到频域,即可待用。</p>
+<pre><code class="python">oriImg=cv2.imread(&quot;A.bmp&quot;)
+H=oriImg.shape[0]
+W=oriImg.shape[1]
+imgB=oriImg[0:H,0:W,2]
+dctImg=cv2.dct(double(imgB))
+</code></pre>
+<h3 id="水印图案处理"><a href="#水印图案处理" class="headerlink" title="水印图案处理"></a><a style="color:#AE8D73"><strong>水印图案处理</strong></a></h3><p>其实水印图案直接二值化嵌入也是可以的。但是做混淆的目的，是为了防止被别人提取，也为了增加隐蔽性。简单来说，就是把一副图案的像素按照一定规律打乱，<a style="color: #CD661D">但是这个规律必须是可复原的</a>。我采用的是Arnold置乱变换，其要求<a style="color: #CD661D">被置乱的图案一定要是N×N的方图</a>。<br>$$<br>\begin{pmatrix}<br>i^{‘} \\ j^{‘}<br>\end{pmatrix}<br>=\begin{bmatrix}<br>1 &amp; 1\\<br>1 &amp; 2<br>\end{bmatrix}\begin{pmatrix}<br>i \\ j<br>\end{pmatrix}~Mod~N<br>$$<br>Arnold变换是有周期性的，也就是说通过上述公式移动像素，重复一定次数以后就可以恢复成原图，而这个周期也是和图像大小有关的。因此我们可以把移动次数作为密钥来加密置乱之后的图像。在不知道到底置乱了多少次的情况下，及时提取到了置乱的水印，也很难复原水印。另外，Arnold变换是从（1，1）位置开始的，因为（0，0）的话，相当于没有移动。而Python中的图像初始是（0，0）位置，为了避免这个问题，我现在<a style="color: #CD661D">原水印图中加了一圈白边，把N×N的图变成(N+2)×(N+2)，但实际处理中还是把它当作N×N来处理。</a></p>
+<pre><code class="python">def Arnold(w0,row,colum,times):   
+    for k in range(0,times):
+        w1=zeros([row+2,colum+2],dtype=uint8)
+        for i in range(1,row+1):
+            for j in range(1,colum+1):
+                i1=i+j
+                j1=i+2*j
+                if i1&gt;row:
+                    i1=divmod(i1,row)[1]
+                if j1&gt;colum:
+                    j1=divmod(j1,colum)[1]
+                if i1==0:
+                    i1=row
+                if j1==0:
+                    j1=colum
+                w1[i1,j1]=w0[i,j]  
+        w0=w1            
+    return w0
+</code></pre>
+<p>其中<strong>w0</strong>是加了白边以后(N+2)×(N+2)图，<strong>row, colum</strong>是原图的尺寸N，<strong>times</strong>表示置乱次数。</p>
+<p><div style="text-align:center"><br><img src="https://od.lk/s/117844354_GGbsn/qrcode1.png" alt="QRcode"><br>水印原图<br><img src="https://od.lk/s/117844376_SJ6O4/arnold.png" alt="Arnold"><br>置乱90次以后<br></div><br>那么如何求出变换的周期呢？对于N×N的图来说，其周期为：</p>
+<pre><code class="python">def period(N):
+    x=1
+    y=1
+    T=1
+    t=x
+    x=x+y
+    y=t+2*y
+    while x!=1 and y!=1:
+        T=T+1
+        if x&gt;N:
+            x=divmod(x,N)[1]
+        if y&gt;N:
+            y=divmod(y,N)[1]
+        t=x
+        x=x+y
+        y=t+2*y   
+    a=T
+    return a
+</code></pre>
+<p>也就是说，对于196×196的的水印图，其周期为168次，置乱用了90次，复原还需要再变换78次。</p>
+<h3 id="嵌入水印"><a href="#嵌入水印" class="headerlink" title="嵌入水印"></a><a style="color:#AE8D73"><strong>嵌入水印</strong></a></h3><p>接下来就是把水印信息，加载到之前待用的原图频域中。一般来说，应该<a style="color: #CD661D">尽量把水印信息分散加到低频信号中</a>，这样隐藏度较高，而且对原图视觉上影响较小。数值上解释就是对于置乱的水印图\(W(i,j)\)，需要找到一个对应关系把其中的每一个像素对应到频域\(I^{dct}(u,v)\)中。比较好一点的办法，是将\(I^{dct}(u,v)\)进行8×8分块，然后\(W(i,j)\)分散加到\(I^{dct}(u,v)\)中。我这里主要为了测试，<a style="color: #CD661D">因此为了简便，我直接把\(W(i,j)\)加载到了一个相对低频的固定位置</a>。 另外，对于水印的加载，最好不要\(I^{dct}(u,v)=I^{dct}(u,v)+W(i,j)\)这样处理，因为很有可能会溢出。我采取的方法是设置一个系数\(a\)，当\(W(i,j)\leq120\),\(a=-1\),否则为1。然后用这个系数来调整\(I^{dct}(u,v)\)的值。最后，再把载有水印信息的图，反DCT变换，赋值到原图B通道，就得到了带有水印的彩色图。</p>
+<pre><code class="python">for i in range(0,N):
+        for j in range(0,N):
+            if W[i,j]&lt;=120:
+                a=-1
+            else:
+                a=1
+            dctImg[500+i,500+j]=(1+a*0.01)*dctImg[500+i,500+j]        
+    idct=cv2.idct(dctImg)    
+    final=oriImg
+    final[0:H,0:W,2]=idct[0:H,0:W]
+</code></pre>
+<p><div style="text-align:center; height:100%; width:100%"><br><img src="https://od.lk/s/117844212_ZXyT1/ori.png" alt="Original"><br>原图<br><img src="https://od.lk/s/117844648_kBGsJ/final.png" alt="withMarker"><br>嵌入水印后的图<br></div><br>以上两图，其实还是有点变化的，亮度方面提升了。一来,是因为水印都在B分量，二来，我也没有分散加到频率信号中，以后实际使用细化即可。</p>
+<h2 id="水印提取"><a href="#水印提取" class="headerlink" title="水印提取"></a><a style="color:#AE8D73"><strong>水印提取</strong></a></h2><p>水印的提取就是上述过程的逆过程。直接看代码好了,先把原图和带水印的图的B分量都进行DCT变换：</p>
+<pre><code class="python">finalB=final[0:H,0:W,2]
+dctFinal=cv2.dct(double(finalB))
+newOriImg=cv2.imread(&quot;A.bmp&quot;)
+newImgB=newOriImg[0:H,0:W,2]
+newDctImgB=cv2.dct(double(newImgB))
+</code></pre>
+<p>之后，根据嵌入时候的加载方式，<a style="color: #CD661D">逆向提取出置乱后的水印。</a></p>
+<pre><code class="python">extract=zeros([N,N],dtype=uint8)
+for i in range(0,N):
+    for j in range(0,N):
+        a=(dctFinal[500+i,500+j]/newDctImgB[500+i,500+j]-1)/0.01
+        if a&lt;0:
+            extract[i,j]=0
+        else:
+            extract[i,j]=255
+</code></pre>
+<p>最后，由于我们自己之前的置乱是90次，因此，再调用Anorld变换78次即可恢复水印图。</p>
+<p><div style="text-align:center"><br><img src="https://od.lk/s/117845016_KC8Wa/extract.png" alt="extract"><br>提取出的水印<br></div><br>这里水印提取出现了一些噪点，我一时也不确定是什么原因，但是大致应该是添加水印的那个方程设计过于随意，导致了一些精度上的丢失，来回变换以后\(a\)的值出现了不准确的情况。反正是个小小的尝试，以后再优化就好了。</p>
+<p>OK~就这样简单完成一下数字水印了，如果觉得有用，赶快扫描一下水印二维码，打赏在下一下好了。</p>
+
+					</div>
+					
+					
+					<p></p>
+					<div class="denote">
+						<div>
+							<img onclick="load_pic()" id="aliqcode" class="denote_img img-responsive center-block" src="" />
+						</div>
+						<a class="donate_btn" id="donate_btn" onclick="load_pic()" >￥ Donate me.</a>
+					</div>
+					<p></p>
+					<!--share-->
+					<div class="ds-share flat" data-thread-key="post-2016/12/06/Python数字水印来一发/-Python数字水印来一发" data-title="Python彩色图像数字水印来一发" data-images="" data-content="" data-url="http://www.bigbai.com.cn/2016/12/06/Python数字水印来一发/">
+						<div class="ds-share-inline">
+							<div class="ds-share-icons-more">
+							</div>
+							<ul  class="ds-share-icons-16">		
+								<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">Share: </a></li>
+								<li> <a class="ds-wechat" href="javascript:void(0);" data-service="wechat">&nbsp</a> </li>
+								<li> <a class="ds-weibo" href="javascript:void(0);" data-service="weibo">&nbsp</a> </li>
+								<li> <a class="ds-facebook" href="javascript:void(0);" data-service="facebook">&nbsp</a> </li> 
+								<li> <a class="ds-twitter" href="javascript:void(0);" data-service="twitter">&nbsp</a> </li>
+								
+							</ul>
+							
+						</div>
+					 </div>
+					 <!--END SHARE-->
+
+
+					<!-- 多说评论框 start -->
+						<div class="ds-thread" data-thread-key="post-2016/12/06/Python数字水印来一发/-Python数字水印来一发" data-title="Python彩色图像数字水印来一发" data-url="http://www.bigbai.com.cn/2016/12/06/Python数字水印来一发/"></div>
+						<!-- 多说评论框 end -->
+						<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+						<script type="text/javascript">
+							var duoshuoQuery = {short_name:"bigbai"};
+								(function() {
+									var ds = document.createElement('script');
+									ds.type = 'text/javascript';ds.async = true;
+									ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+									ds.charset = 'UTF-8';
+									(document.getElementsByTagName('head')[0] 
+									 || document.getElementsByTagName('body')[0]).appendChild(ds);
+								})();
+						</script>
+					<!-- 多说公共JS代码 end -->
+				</div>
+			</div>	
+		</div>
+		<!-- SIDE BAR -->
+<div class="col-md-3 sidebar">
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Categories
+				</h3>
+				<ul>
+					<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Big-Data/">Big Data</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interesting-Trick/">Interesting Trick</a><span class="category-list-count">3</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Tags
+				</h3
+				<ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/">Spark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vision/">Vision</a><span class="tag-list-count">1</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Archives
+				</h3
+				<ul>
+					<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">4</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+			
+	</div>
+</section>
+
+		</div>
+		
+	</div>
+	<div>
+		<!-- BEGIN FOOTER -->
+<footer>
+	<div class="row">
+		<div class="col-md-12">
+			<p style="margin-bottom: 0">
+				© 2016 Designed by BIGBAI. Adapted to <a href="https://hexo.io/"> Hexo</a>
+			</p>             
+			<p >
+				-Friend：<a href="http://blackpoint-cx.github.io">BlackPoint</a>- 
+			</p>
+		</div>
+	</div>
+</footer>
+<!-- END FOOTER -->
+
+
+
+<!-- Back to top -->
+<div id="backtotop">       
+	<a class="to-top-btn sscroll" href="#top"><i class="fa fa-angle-double-up"></i></a>
+</div>
+	</div>
+
+    <!-- Library Scripts -->
+	<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/lib/jquery.preloader.js"></script>
+<script src="/js/lib/nivo-lightbox.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lib/jquery.superslides.min.js"></script>
+<script src="/js/lib/smoothscroll.js"></script>
+<!--<script src="/js/lib/jquery.sudoslider.min.js"></script>-->
+<script src="/js/lib/jquery.bxslider.min.js"></script>
+<script src="/js/lib/jquery.mixitup.min.js"></script>
+<script src="/js/lib/jquery.backtotop.js"></script>
+<script src="/js/lib/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script src="/js/lib/retina.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<!-- Custom Script -->    
+<script src="/js/main.js"></script>
+
+<script>
+	function load_pic()
+		{
+		var imgObj = document.getElementById("aliqcode");
+		var Flag=(imgObj.getAttribute("src",2)=="/images/wechat.jpg")
+		imgObj.src=Flag?"":"/images/wechat.jpg";
+		
+		var textObj = document.getElementById("donate_btn");
+		if(textObj.innerHTML =="Scan WeChat QR Code")
+		{
+			textObj.innerHTML ="￥ Donate me.";
+		}
+		else
+		{
+			textObj.innerHTML ="Scan WeChat QR Code";
+		}
+	}
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</body>
+
+</html>
