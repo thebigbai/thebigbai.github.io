@@ -75,7 +75,7 @@
 					<!-- Title -->
 					<h2 class="post-title">
 						<a class="article-full-color">
-							Set up Spark 2.0 on Intellij Idea
+							SLAM
 						</a>
 					</h2>
 					
@@ -85,84 +85,43 @@
 
 <div class="blog-tags-container">
     <span class="glyphicon glyphicon-tags"></span>
-    <a href="/tags/Spark/">#Spark</a>
+    <a href="/tags/SLAM/">#SLAM</a>
 </div>
 
 				
 					
 
-<div class="blog-categories-container">
-    <span class="glyphicon glyphicon-folder-open"></span>
-    <a href="/categories/Big-Data/">Big Data</a>
-</div>
-
-
 					<!-- Date and Author -->
 					<p class="post-meta">
-						2016-11-22
+						2017-05-07
 						
 					</p>
 
 					<!-- Content -->
-					<div id="2016-11-22" class="post-content content_align">
+					<div id="2017-05-07" class="post-content content_align">
 					
 						<!-- Table of Contents -->
 						
-						<div id="toc" class="toc-article">
-							<strong class="toc-title">Table of Content</strong>
-							<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Install-Java"><span class="toc-text">Install Java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Install-Scala"><span class="toc-text">Install Scala</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Setup-Spark2-X-on-Intellij-Idea"><span class="toc-text">Setup Spark2.X on Intellij Idea</span></a></li></ol>
-						</div>
 						
 						
-						
-						<!-- toc -->
-<p>It was a sunny day. I started to setup my Spark Evironment. After reading a lot of online tutorials about how to config Spark1.X on Intellij Idea, I found it would be very easy. <a style="color: #CD661D">But something unexpected may happen any time.</a> I still met some troubles as the Spark2.X has some differences from Spark1.X. That is why I want to write this blog to specify how to setup Spark2.X on Intellij Idea. There are five elements required:<br><a id="more"></a></p>
+						<p><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>近年工作中，唯一能和之前所学的机器人方向比较有关联的，就是虚拟拍摄系统中的视觉定位系统了。于是借着这个机会，在这一年多的时间里，断断续续，又学习和回顾了一些和SLAM比较相关的知识。俗话说的好：“好记性不如烂笔头，烂笔头不如电子档，电子档不如写在网络上”。于是，我就决定将我的好记性记录一下。</p>
+<p>SLAM的东西，实际理解起来确实有一定的难度。所以我自己的一些理解可能也会是错的。以后发现了，慢慢再来修正，也希望有人能指出我的一些错误。OK，Let‘s GO！ </p>
+<h1 id="关于相机模型"><a href="#关于相机模型" class="headerlink" title="关于相机模型"></a>关于相机模型</h1><p>建立相机模型，主要是为了讨论一下，摄像机的内外参数问题，也就是空间一点\(P(X，Y，Z)\)在以下几个坐标系的转换： </p>
 <blockquote>
-<ul>
-<li>Ubuntu OS</li>
-<li>JAVA </li>
-<li>Spark 2.x (in my case, spark-2.0.2-bin-hadoop2.7)</li>
-<li>Scala</li>
-<li>Intellij Idea</li>
-</ul>
+<ol>
+<li>世界坐标系-&gt;相机坐标系 </li>
+<li>相机坐标系-&gt;成像平面坐标系 </li>
+<li>成像平面坐标系-&gt;像素坐标系 </li>
+</ol>
 </blockquote>
-<p>Ok, let us go!</p>
-<h2 id="Install-Java"><a href="#Install-Java" class="headerlink" title="Install Java"></a><a style="color:#AE8D73"><strong>Install Java</strong></a></h2><p>The first step is to ensure that the Ubuntu has the Java JDK. After downloading <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">JDK</a>, we need to decompress the <strong>“.tar.gz”</strong> to the directory we want to install it. For exmaple: /usr/local/lib/jvm/. Then add the <strong>JAVA_HOME</strong> to our system. Open Bash, type:</p>
-<pre><code>sudo gedit /etc/profile
-</code></pre><p>Add following path to the end of profile:</p>
-<pre><code>#JAVA path
-export JAVA_HOME=/usr/local/lib/jvm/java
-export JRE_HOME=${JAVA_HOME}/jre  
-export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib  
-export PATH=${JAVA_HOME}/bin:$PATH
-</code></pre><p>Sava and return to the Bash to check whether Java is installed to OS.</p>
-<pre><code>java -version
-</code></pre><h2 id="Install-Scala"><a href="#Install-Scala" class="headerlink" title="Install Scala"></a><a style="color:#AE8D73"><strong>Install Scala</strong></a></h2><p>Although Spark has JAVA and Python API, its kernel language is Scala. So we also need to setup scala to our OS. We can download Scala from: <a href="http://www.scala-lang.org/download" target="_blank" rel="external">http://www.scala-lang.org/download</a>. It is <a style="color: #CD661D">very very very important</a> to choose right version, becuase Spark does not support all scala version. In my case, I use scala 2.12.X version in the beginning. Then I run Spark code with error. So I change to scala2.11.x. Similarly, decompress scala-2.11.X.tar to where you want install. </p>
-<h2 id="Setup-Spark2-X-on-Intellij-Idea"><a href="#Setup-Spark2-X-on-Intellij-Idea" class="headerlink" title="Setup Spark2.X on Intellij Idea"></a><a style="color:#AE8D73"><strong>Setup Spark2.X on Intellij Idea</strong></a></h2><p>Next, download Spark from <a href="http://spark.apache.org/" target="_blank" rel="external">http://spark.apache.org/</a>. Also decompress it and remember its path. Open Intellij Idea, select “File-Settings-Plugins”. Search “scala” in “Browse Repositories” to find the scala plugin and install it.</p>
-<p>Now, we can select “File-Create-Project” to create a Scala project. Next, we have three steps in “File-Project Structure”.</p>
-<blockquote>
-<ul>
-<li>Set JDK Path to <em>Project</em> tab.</li>
-<li>Set Scala Path to <em>Global Libraries</em> tab</li>
-<li>Set Spark Path to <em>Libraries</em> tab<br>It is noteworthy that <a style="color: #CD661D">comparing with Spark1.X</a>, the Spark2.x dose not has “/lib/spark-assembly-XXXXX.jar”. <a style="color: #CD661D">Instead</a>, there is a “jars” directory. So in the final step, what we need to do is to add the path of “jars” to the <strong>“Libraries” tab</strong> .</li>
-</ul>
-</blockquote>
-<p>Ok run a simple Spark code to test:</p>
-<pre><code class="scala">import org.apache.spark.{SparkConf, SparkContext}
-/**
-  * Created by BIGBAI on 18/11/2016.
-  */
-object TestScala {
-  def main(args: Array[String]): Unit={
-    val conf = new SparkConf().setAppName(&quot;first spark&quot;)
-    conf.setMaster(&quot;local[2]&quot;)
-    val sc = new SparkContext(conf)
-    sc.stop()
-    println(sc)
-  }
-}
-</code></pre>
-<p>If everything is ok, the Spark2.X can successfully run in Intellij Idea. If there is still some errors, please feel free to discuss with me. Or, you can try to <a href="https://www.ibm.com/developerworks/community/files/basic/anonymous/api/library/e5c0146d-f723-446b-9151-c31d4c56ed01/document/b41505ac-141b-45a2-84cd-1b6a8d5ae653/media/Setting%20up%20spark%202.0%20with%20intellij%20community%20edition.pdf" target="_blank" rel="external">use SBT to set up Spark2.X</a>.</p>
+<p>通常的模型图示如下图1所示，空间点\(P\)通过光心\O\)在成像平面形成倒立的像。但是我们通常获取到的数字图像其实也是正的，不是反的。因此，我们可以将这个模型，简单的转动一下，把成像平面转到前面来（如图2所示），这样有助于我们公式的推导与理解。</p>
+<p>设空间一点\(P\)的世界坐标为\(P（X，Y，Z）\)。则其在相机坐标系的表示为：<br>$$<br>\begin{pmatrix}<br>x\\y\\ z\\1<br>\end{pmatrix}=(R|T)\begin{bmatrix}<br>X\\Y\\ Z\\ 1<br>\end{bmatrix}<br>$$<br>其中，\(R, T\)表示由世界坐标系到相机坐标系的旋转矩阵和平移向量。之后，根据相似三角形的性质，我们可以得出以下等式：<br>$$<br>\frac{x}{x^{‘}}=\frac{z}{f}<br>\Rightarrow<br>x^{‘}=\frac{fx}{z}\\<br>\frac{y}{y^{‘}}=\frac{z}{f}<br>\Rightarrow<br>y^{‘}=\frac{fy}{z}<br>$$</p>
+<p>其中\(f\)是相机的焦距信息。当然，一般而言，从相机坐标系转换到成像平面的过程中，存在一个尺度问题, 即物理距离到像素的比例，假设\(x^{‘}\)方向的比例为\(\alpha\), 而\(y^{‘}\)方向的比例为\(\beta\)，则可以定义：<br>$$<br>f_{x}=\alpha f\\ f_{y}=\beta f<br>$$</p>
+<p>那么，公式x可以写为：<br>$$<br>x^{‘}=\frac{f_{x}x}{z}\\ y^{‘}=\frac{f_{y}y}{z}<br>$$<br>此时，我们得到了成像平面上，\(P\)对应点\(P^{‘}\)的像素坐标值。但是，目前坐标值是以图像中心为原点的，而通常我们处理的图像是以图像的一个角，例如右上角作为原点的，这个坐标系，一般称为<em>uv</em>坐标，因此，需要将\(x^{‘}, y^{‘}\)进行一个平移操作：<br>$$<br>u=x^{‘}+u_{0}\\ v=y^{‘}+v_{0}<br>$$<br>整合以上各式，用齐次坐标来表示，则：<br>$$<br>\begin{bmatrix} u\\ v \\ 1 \end{bmatrix}=<br>\begin{bmatrix}<br>\alpha &amp; 0 &amp; u_{0} \\<br>0 &amp; \beta &amp; v_{0}\\<br>0 &amp; 0 &amp; 1 \end{bmatrix}<br>\frac{1}{z}<br>\begin{bmatrix}<br>f &amp;0 &amp;0 &amp;0 \\ 0&amp;f &amp;0 &amp; 0\\ 0&amp;0 &amp;1 &amp; 0 \end{bmatrix}<br>(R|T) \begin{bmatrix} X\\ Y \\ Z \\ 1 \end{bmatrix}<br>$$</p>
+<p>整理一下公式，可以化为：<br>$$<br>\begin{bmatrix} u\\ v \\ 1 \end{bmatrix}=<br>\frac{1}{z}\begin{bmatrix}<br>f_{x}\alpha &amp; 0 &amp; u_{0} \\<br>0 &amp; f_{y}\beta &amp; v_{0}\\<br>0 &amp; 0 &amp; 1 \end{bmatrix}<br>(R|T) \begin{bmatrix} X\\ Y \\ Z \\ 1 \end{bmatrix}=\frac{1}{z}KP\begin{bmatrix} X\\ Y \\ Z \\ 1 \end{bmatrix}<br>$$<br>其中，\(K\)被称为内参矩阵，\(P\)被称为外参矩阵。</p>
+<h1 id="对极几何"><a href="#对极几何" class="headerlink" title="对极几何"></a>对极几何</h1><p>关于对极几何，主要简单分析一下基本概念和一些公式，因为如果是视觉SLAM的问题，可以理解为，已知连续运动的相机的画面中匹配的特征位置，求相机的运动（定位），以及特征在空间中的位置（建图）这样一个问题。对于单目相机来说，对极几何的知识可能是有用的。</p>
+<h2 id="Essential-Matrix-amp-Fundamental-Matrix"><a href="#Essential-Matrix-amp-Fundamental-Matrix" class="headerlink" title="Essential Matrix &amp; Fundamental Matrix"></a>Essential Matrix &amp; Fundamental Matrix</h2><p>对极几何的通常形式，如下图所示：</p>
+<p>在图中\(P\)是空间中的一点，\(O_{1}\)和\(O_{2}\)分别是相机在不同位置时的光心位置。我们以\(O_{1}\)为参考系来分析，则点\(P(X,Y,Z)\)在1成像平面的投影\(p_{1}\)满足：<br>$$<br>Zp<em>{1}=KP<br>$$<br>\(K\)为内参矩阵。同理，在\(O\</em>{1}\)的参考系下，在2成像平面的投影\(p_{2}\)为：<br>$$<br>Zp<em>{2}=K(RP+t)<br>$$<br>\(R,t\)是将\(O\</em>{2}\)变换到\(O_{1}\)的旋转和平移。注意：当前的\(p_{1}, p_{2}\)是以像素坐标表示的：<br>$$<br>p_{1}=\begin{bmatrix} u_{1}\\ v_{1} \\ 1 \end{bmatrix},<del>~</del><br>p_{2}=\begin{bmatrix} u_{2}\\ v_{2} \\ 1 \end{bmatrix}<br>$$<br>将其去内参处理，得到：<br>$$<br>\left{\begin{matrix}<br>x_{1}=K^{-1}p_{1}\\<br>x_{2}=K^{-1}p_{2}\\<br>x_{2}=Rx<em>{1}+t<br>\end{matrix}\right.<br>$$<br>此时的\(x{1},x{2}\)表示的是点\(P(X,Y,Z)\)的两个投影，在相机坐标系下的坐标，其形式为：<br>$$<br>x\</em>{1}=\begin{bmatrix} x_{1c}\\ y_{1c} \\ z_{1c} \end{bmatrix},~~~<br>x_{2}=\begin{bmatrix} x_{2c}\\ y_{2c} \\ z_{2c} \end{bmatrix},<br>$$</p>
 
 					</div>
 					
@@ -176,7 +135,7 @@ object TestScala {
 					</div>
 					<p></p>
 					<!--share-->
-					<div class="ds-share flat" data-thread-key="post-2016/11/22/Set up Spark2.0 on Intellij Idea/-Set up Spark2.0 on Intellij Idea" data-title="Set up Spark 2.0 on Intellij Idea" data-images="" data-content="" data-url="http://www.bigbai.com.cn/2016/11/22/Set up Spark2.0 on Intellij Idea/">
+					<div class="ds-share flat" data-thread-key="post-2017/05/07/SLAM/-SLAM" data-title="SLAM" data-images="" data-content="" data-url="http://www.bigbai.com.cn/2017/05/07/SLAM/">
 						<div class="ds-share-inline">
 							<div class="ds-share-icons-more">
 							</div>
@@ -195,7 +154,7 @@ object TestScala {
 
 
 					<!-- 多说评论框 start -->
-						<div class="ds-thread" data-thread-key="post-2016/11/22/Set up Spark2.0 on Intellij Idea/-Set up Spark2.0 on Intellij Idea" data-title="Set up Spark 2.0 on Intellij Idea" data-url="http://www.bigbai.com.cn/2016/11/22/Set up Spark2.0 on Intellij Idea/"></div>
+						<div class="ds-thread" data-thread-key="post-2017/05/07/SLAM/-SLAM" data-title="SLAM" data-url="http://www.bigbai.com.cn/2017/05/07/SLAM/"></div>
 						<!-- 多说评论框 end -->
 						<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 						<script type="text/javascript">
