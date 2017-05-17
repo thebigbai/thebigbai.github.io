@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="baidu-site-verification" content="IPMJn3GbW9" />
+    <meta name="google-site-verification" content="5qg7SdWiFgE02QeLILrFWE25WewlG8uqdAIBMgYwn8Q" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/darcula.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/favicon/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/images/favicon/favicon.png" type="image/x-icon">
+
+    <title>The BIGBAI</title>
+	
+    <!--Library Styles-->    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/lib/font-awesome.css" rel="stylesheet">
+    <link href="/css/lib/nivo-lightbox.css" rel="stylesheet">
+    <link href="/css/lib/nivo-themes/default/default.css" rel="stylesheet">
+	
+    <!--Template Styles-->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/scheme/purple.css" rel="stylesheet">
+
+
+
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+      <script src="/js/respond.min.js"></script>
+    <![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+<body data-spy="scroll" id="top">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main-wrapper">
+		<!-- Site Navigation -->
+		<div id="menu">
+	<nav class="navbar navbar-default" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html#">
+				<img src="/images/logo.png" alt="logo">
+			</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-navbar-collapse">
+			<ul class="nav navbar-nav">
+				
+					<li><a class="nav-font-size" href="/">Home</a></li>
+				
+					<li><a class="nav-font-size" href="/archives">Archives</a></li>
+				
+					<li><a class="nav-font-size" href="/about">About</a></li>
+				
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</nav>
+</div>
+
+	  
+		<div id="container" style="max-width:100%;">
+			<section id="blog-full" class="blog">
+	<div class="row">
+		<div class="col-md-9">
+			<div id="primary" class="row">
+				<div class="blog-post">
+					<!-- Title -->
+					<h2 class="post-title">
+						<a class="article-full-color">
+							SLAM
+						</a>
+					</h2>
+					
+					<!-- Tags and Categories links -->
+					
+					
+
+<div class="blog-tags-container">
+    <span class="glyphicon glyphicon-tags"></span>
+    <a href="/tags/Vision/">#Vision</a> <a href="/tags/SLAM/">#SLAM</a>
+</div>
+
+				
+					
+
+<div class="blog-categories-container">
+    <span class="glyphicon glyphicon-folder-open"></span>
+    <a href="/categories/Robotics/">Robotics</a>
+</div>
+
+
+					<!-- Date and Author -->
+					<p class="post-meta">
+						2017-05-07
+						
+					</p>
+
+					<!-- Content -->
+					<div id="2017-05-07" class="post-content content_align">
+					
+						<!-- Table of Contents -->
+						
+						<div id="toc" class="toc-article">
+							<strong class="toc-title">Table of Content</strong>
+							<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于相机模型"><span class="toc-text">关于相机模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对极几何"><span class="toc-text">对极几何</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Essential-Matrix-amp-Fundamental-Matrix"><span class="toc-text">Essential Matrix & Fundamental Matrix</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单应矩阵"><span class="toc-text">单应矩阵</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于EKF的SLAM问题描述"><span class="toc-text">基于EKF的SLAM问题描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EKF"><span class="toc-text">EKF</span></a></li></ol></li></ol>
+						</div>
+						
+						
+						
+						<!-- toc -->
+<p><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><br>近年工作中，唯一能和之前所学的机器人方向比较有关联的，就是虚拟拍摄系统中的视觉定位系统了。于是借着这个机会，在这一年多的时间里，断断续续，又学习和回顾了一些和SLAM比较相关的知识。俗话说的好：“好记性不如烂笔头，烂笔头不如电子档，电子档不如写在网络上”。于是，我就决定将我的好记性记录一下。</p>
+<p>虚拟拍摄的本质核心是要将实拍摄像头的参数信息，实时传递到虚拟场景中，让虚拟摄像机与其参数同步。因此本质上就是一个SLAM的问题，即：计算实拍相机到底在哪里（定位），以及这个场景里有哪些东西是我的定位参考（建图）。对于SLAM的东西，个人觉得理解起来确实有一定的难度。所以我自己的一些理解可能也会是错的。以后发现了，慢慢再来修正，也希望有人能指出我的一些错误。OK，Let‘s GO！ </p>
+<a id="more"></a>
+<h2 id="关于相机模型"><a href="#关于相机模型" class="headerlink" title="关于相机模型"></a><a style="color:#AE8D73"><strong>关于相机模型</strong></a></h2><p>建立相机模型，主要是为了讨论一下，摄像机的内外参数问题，也就是空间一点\(P(X，Y，Z)\)在以下几个坐标系的转换： </p>
+<blockquote>
+<ol>
+<li>世界坐标系-&gt;相机坐标系 </li>
+<li>相机坐标系-&gt;成像平面坐标系 </li>
+<li>成像平面坐标系-&gt;像素坐标系 </li>
+</ol>
+</blockquote>
+<p>通常的模型图示如下图1所示，空间点\(P\)通过光心\(O\)在成像平面形成倒立的像。但是我们通常获取到的数字图像其实也是正的，不是反的。因此，我们可以将这个模型，简单的转动一下，把成像平面转到前面来（如图2所示），这样有助于我们公式的推导与理解。</p>
+<p>设空间一点\(P\)的世界坐标为\(P（X，Y，Z）\)。则其在相机坐标系的表示为：<br>$$<br>\begin{pmatrix}<br>x\\y\\ z\\1<br>\end{pmatrix}=(R|T)\begin{bmatrix}<br>X\\Y\\ Z\\ 1<br>\end{bmatrix}<br>$$<br>其中，\(R, T\)表示由世界坐标系到相机坐标系的旋转矩阵和平移向量。之后，根据相似三角形的性质，我们可以得出以下等式：<br>$$<br>\frac{x}{x^{‘}}=\frac{z}{f}<br>\Rightarrow<br>x^{‘}=\frac{fx}{z}\\<br>\frac{y}{y^{‘}}=\frac{z}{f}<br>\Rightarrow<br>y^{‘}=\frac{fy}{z}<br>$$</p>
+<p>其中\(f\)是相机的焦距信息。当然，一般而言，从相机坐标系转换到成像平面的过程中，存在一个尺度问题, 即物理距离到像素的比例，假设\(x^{‘}\)方向的比例为\(\alpha\), 而\(y^{‘}\)方向的比例为\(\beta\)，则可以定义：<br>$$<br>f_{x}=\alpha f\\ f_{y}=\beta f<br>$$</p>
+<p>那么，公式x可以写为：<br>$$<br>x^{‘}=\frac{f_{x}x}{z}\\ y^{‘}=\frac{f_{y}y}{z}<br>$$<br>此时，我们得到了成像平面上，\(P\)对应点\(P^{‘}\)的像素坐标值。但是，目前坐标值是以图像中心为原点的，而通常我们处理的图像是以图像的一个角，例如右上角作为原点的，这个坐标系，一般称为<em>uv</em>坐标，因此，需要将\(x^{‘}, y^{‘}\)进行一个平移操作：<br>$$<br>u=x^{‘}+u_{0}\\ v=y^{‘}+v_{0}<br>$$<br>整合以上各式，用齐次坐标来表示，则：<br>$$<br>\begin{bmatrix} u\\ v \\ 1 \end{bmatrix}=<br>\begin{bmatrix}<br>\alpha &amp; 0 &amp; u_{0} \\<br>0 &amp; \beta &amp; v_{0}\\<br>0 &amp; 0 &amp; 1 \end{bmatrix}<br>\frac{1}{z}<br>\begin{bmatrix}<br>f &amp;0 &amp;0 &amp;0 \\ 0&amp;f &amp;0 &amp; 0\\ 0&amp;0 &amp;1 &amp; 0 \end{bmatrix}<br>(R|T) \begin{bmatrix} X\\ Y \\ Z \\ 1 \end{bmatrix}<br>$$</p>
+<p>整理一下公式，可以化为：<br>$$<br>\begin{bmatrix} u\\ v \\ 1 \end{bmatrix}=<br>\frac{1}{z}\begin{bmatrix}<br>f_{x}\alpha &amp; 0 &amp; u_{0} \\<br>0 &amp; f_{y}\beta &amp; v_{0}\\<br>0 &amp; 0 &amp; 1 \end{bmatrix}<br>(R|T) \begin{bmatrix} X\\ Y \\ Z \\ 1 \end{bmatrix}=\frac{1}{z}KP\begin{bmatrix} X\\ Y \\ Z \\ 1 \end{bmatrix}<br>$$<br>其中，\(K\)被称为内参矩阵，\(P\)被称为外参矩阵。</p>
+<h2 id="对极几何"><a href="#对极几何" class="headerlink" title="对极几何"></a><a style="color:#AE8D73"><strong>对极几何</strong></a></h2><p>关于对极几何，主要简单分析一下基本概念和一些公式，因为如果是视觉SLAM的问题，可以理解为，已知连续运动的相机的画面中匹配的特征位置，求相机的运动（定位），以及特征在空间中的位置（建图）这样一个问题。对于单目相机来说，对极几何的知识可能是有用的。</p>
+<h3 id="Essential-Matrix-amp-Fundamental-Matrix"><a href="#Essential-Matrix-amp-Fundamental-Matrix" class="headerlink" title="Essential Matrix &amp; Fundamental Matrix"></a><a style="color:#AE8D73"><strong>Essential Matrix &amp; Fundamental Matrix</strong></a></h3><p>对极几何的通常形式，如下图所示：</p>
+<p>在图中\(P\)是空间中的一点，\(O_{1}\)和\(O_{2}\)分别是相机在不同位置时的光心位置。我们以\(O_{1}\)为参考系来分析，则点\(P(X,Y,Z)\)在1成像平面的投影\(p_{1}\)满足：<br>$$<br>Zp_{1}=KP<br>$$<br>\(K\)为内参矩阵。同理，在\(O_{1}\)的参考系下，在2成像平面的投影\(p_{2}\)为：<br>$$<br>Zp_{2}=K(RP+t)<br>$$<br>\(R,t\)是将\(O_{2}\)变换到\(O_{1}\)的旋转和平移。注意：当前的\(p_{1}, p_{2}\)是以像素坐标表示的：<br>$$<br>p_{1}=\begin{bmatrix} u_{1} \\ v_{1} \\ 1 \end{bmatrix} \\<br>p_{2}=\begin{bmatrix} u_{2} \\ v_{2} \\ 1 \end{bmatrix}<br>$$<br>将其去内参处理，得到：<br>$$<br>\left\{\begin{matrix}<br>x_{1}=K^{-1}p_{1}\\<br>x_{2}=K^{-1}p_{2}\\<br>\end{matrix}\right.~~~where:x_{2}=Rx_{1}+t<br>$$<br>此时的\(x{1},x{2}\)表示的是点\(P(X,Y,Z)\)的两个投影，在相机坐标系下的坐标，其形式为：<br>$$<br>x_{1}=\begin{bmatrix} x_{1c}\\ y_{1c} \\ z_{1c} \end{bmatrix}\\<br>x_{2}=\begin{bmatrix} x_{2c}\\ y_{2c} \\ z_{2c} \end{bmatrix}<br>$$<br>之后，在\(x_{2}=Rx_{1}+t \)上用\(t\)做叉乘然后化简：<br>$$<br>t\otimes x_{2}=t \otimes Rx_{1}+t\otimes t\\<br>t\otimes x_{2}=t \otimes Rx_{1}+0\\<br>x_{2}^{T}t\otimes x_{2}=x_{2}^{T}t \otimes Rx_{1}\\<br>0=x_{2}^{T}t \otimes Rx_{1}\\<br>x_{2}^{T}Ex_{1}=0<br>$$<br>这里的\(E\)就是Essential Matrix。将内参带入以后：<br>$$<br>p_{2}^{T}K^{-1}t\otimes RK^{-1}p_{1}=0\\<br>p_{2}^{T}Fp_{1}=0<br>$$<br>\(F\)就是Fundamental Matrix。 上述两个矩阵分别描述了空间同一点在不同位置处，所处的投影点，基于图像坐标和相机坐标的对应关系。 一般可以使用八点法来求出矩阵，从而算出\(R\)和\(t\)。</p>
+<h3 id="单应矩阵"><a href="#单应矩阵" class="headerlink" title="单应矩阵"></a><a style="color:#AE8D73"><strong>单应矩阵</strong></a></h3><p>如果，两幅图像的对应点集满足一个关系：在同一平面，那么这个问题可以简化为用更少的点求解，这个关系称为单应关系。这个更加符合虚拟拍摄系统的解决方案，因为通常一个比较简单的做法，是把待识别的标志放置与天棚上，使其在同一平面。 下面我们来推到一下这个矩阵，基于上述的描述，我们有：<br>$$<br>p_{2}=K(RP+t)<br>$$<br>假设所有点所在的平面方程为：<br>$$<br>n^{T}P+d=0 \Rightarrow \frac{-n^{T}P}{d}=1<br>$$<br>将上式带入,并化简后得到：<br>$$<br>p_{2}=K(RP+t(\frac{-n^{T}P}{d}))\\<br>p_{2}=K(R-(\frac{-rn^{T}}{d}))P\\<br>p_{2}=K(R-(\frac{-rn^{T}}{d}))K^{-1}p_{1}<br>p_{2}=Hp_{1}<br>$$<br>这个\(H\)矩阵就称为单应矩阵。</p>
+<h2 id="基于EKF的SLAM问题描述"><a href="#基于EKF的SLAM问题描述" class="headerlink" title="基于EKF的SLAM问题描述"></a><a style="color:#AE8D73"><strong>基于EKF的SLAM问题描述</strong></a></h2><p>终于进入正式的主题——SLAM。 对于虚拟拍摄中的SLAM问题，其实是一个三维空间定位的问题，为了便于理解，这里用一个二维的例子来理解一下SLAM的原理，但在这之前，先简单理解一下扩展卡尔曼滤波系统（EKF）。</p>
+<h3 id="EKF"><a href="#EKF" class="headerlink" title="EKF"></a><a style="color:#AE8D73"><strong>EKF</strong></a></h3><p>先简单说一下线性卡尔曼滤波器，简单来说，就是对于一个优化问题，我们能够列出一个状态方程，用来预估下一时刻的状态。那么，我们的预估模型肯定不是100%正确的，于是又需要一个观测模型来帮助我们修正一下最终的结果。直白一点说，状态预估模型是不可靠的，观测模型也是不可靠的，但是两者结合以后可以帮助我们得到一个相对可靠一点的结果。对于线性模型，我们的两个方程很简单：<br>$$<br>x_{t}^{-}=Fx_{t-1}+Bu_{t}+w\\<br>z_{t}=Hx_{t}+v<br>$$<br>那么对于非线性的模型怎么办呢？对于一个非线性的状态转化模型\(x_{t}^{-}=f(x_{t-1},u_{t-1},w)\)与观测模型\(z_{t}=h(x_{t},v)\)，我们可以采用泰勒展开的方式，用一阶偏导数来更新状态，那么卡尔曼滤波的5个方程将会变成如下形式：<br>$$<br>x_{t}^{-}=f(x_{t-1},u_{t-1},w_{t-1})\\<br>P_{t}^{-}=FP_{t-1}F^{T}+UQU^{T}\\<br>\\<br>K=P_{t}^{-}H_{t}^{T}(H_{t}P_{t}^{-}H_{t}^{T}+R)^{-1}\\<br>x<em>{t}=x\</em>{t}^{-}+K(z_{t}-h(x_{t}^{-},v_{t-1}))\\<br>P_{t}=(I-KH_{t})P_{t}^{-}<br>$$<br>其中，\(Q,R\)为状态噪声和观测噪声的协方差矩阵,而\(F,U,H\)分别为：<br>$$<br>F=\frac{\partial f}{\partial x}，<del>U=\frac{\partial f}{\partial u}，</del>~H=\frac{\partial z}{\partial x}<br>$$<br>这里，我们举个二维例子来实际感受一下EKF的过程。说有个小车在平面上移动，</p>
+
+					</div>
+					
+					
+					<p></p>
+					<div class="denote">
+						<div>
+							<img onclick="load_pic()" id="aliqcode" class="denote_img img-responsive center-block" src="" />
+						</div>
+						<a class="donate_btn" id="donate_btn" onclick="load_pic()" >￥ Donate me.</a>
+					</div>
+					<p></p>
+					<!--share-->
+					<div class="ds-share flat" data-thread-key="post-2017/05/07/SLAM/-SLAM" data-title="SLAM" data-images="" data-content="" data-url="http://www.bigbai.com.cn/2017/05/07/SLAM/">
+						<div class="ds-share-inline">
+							<div class="ds-share-icons-more">
+							</div>
+							<ul  class="ds-share-icons-16">		
+								<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">Share: </a></li>
+								<li> <a class="ds-wechat" href="javascript:void(0);" data-service="wechat">&nbsp</a> </li>
+								<li> <a class="ds-weibo" href="javascript:void(0);" data-service="weibo">&nbsp</a> </li>
+								<li> <a class="ds-facebook" href="javascript:void(0);" data-service="facebook">&nbsp</a> </li> 
+								<li> <a class="ds-twitter" href="javascript:void(0);" data-service="twitter">&nbsp</a> </li>
+								
+							</ul>
+							
+						</div>
+					 </div>
+					 <!--END SHARE-->
+
+
+					<!-- 多说评论框 start -->
+						<div class="ds-thread" data-thread-key="post-2017/05/07/SLAM/-SLAM" data-title="SLAM" data-url="http://www.bigbai.com.cn/2017/05/07/SLAM/"></div>
+						<!-- 多说评论框 end -->
+						<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+						<script type="text/javascript">
+							var duoshuoQuery = {short_name:"bigbai"};
+								(function() {
+									var ds = document.createElement('script');
+									ds.type = 'text/javascript';ds.async = true;
+									ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+									ds.charset = 'UTF-8';
+									(document.getElementsByTagName('head')[0] 
+									 || document.getElementsByTagName('body')[0]).appendChild(ds);
+								})();
+						</script>
+					<!-- 多说公共JS代码 end -->
+				</div>
+			</div>	
+		</div>
+		<!-- SIDE BAR -->
+<div class="col-md-3 sidebar">
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Categories
+				</h3>
+				<ul>
+					<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Big-Data/">Big Data</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interesting-Trick/">Interesting Trick</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Robotics/">Robotics</a><span class="category-list-count">1</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Tags
+				</h3
+				<ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SLAM/">SLAM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/">Spark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vision/">Vision</a><span class="tag-list-count">2</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Archives
+				</h3
+				<ul>
+					<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">4</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+			
+	</div>
+</section>
+
+		</div>
+		
+	</div>
+	<div>
+		<!-- BEGIN FOOTER -->
+<footer>
+	<div class="row">
+		<div class="col-md-12">
+			<p style="margin-bottom: 0">
+				© 2016 Designed by BIGBAI. Adapted to <a href="https://hexo.io/"> Hexo</a>
+			</p>             
+			<p >
+				-Friend：<a href="http://blackpoint-cx.github.io">BlackPoint</a>- 
+			</p>
+		</div>
+	</div>
+</footer>
+<!-- END FOOTER -->
+
+
+
+<!-- Back to top -->
+<div id="backtotop">       
+	<a class="to-top-btn sscroll" href="#top"><i class="fa fa-angle-double-up"></i></a>
+</div>
+	</div>
+
+    <!-- Library Scripts -->
+	<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/lib/jquery.preloader.js"></script>
+<script src="/js/lib/nivo-lightbox.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lib/jquery.superslides.min.js"></script>
+<script src="/js/lib/smoothscroll.js"></script>
+<!--<script src="/js/lib/jquery.sudoslider.min.js"></script>-->
+<script src="/js/lib/jquery.bxslider.min.js"></script>
+<script src="/js/lib/jquery.mixitup.min.js"></script>
+<script src="/js/lib/jquery.backtotop.js"></script>
+<script src="/js/lib/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script src="/js/lib/retina.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<!-- Custom Script -->    
+<script src="/js/main.js"></script>
+
+<script>
+	function load_pic()
+		{
+		var imgObj = document.getElementById("aliqcode");
+		var Flag=(imgObj.getAttribute("src",2)=="/images/wechat.jpg")
+		imgObj.src=Flag?"":"/images/wechat.jpg";
+		
+		var textObj = document.getElementById("donate_btn");
+		if(textObj.innerHTML =="Scan WeChat QR Code")
+		{
+			textObj.innerHTML ="￥ Donate me.";
+		}
+		else
+		{
+			textObj.innerHTML ="Scan WeChat QR Code";
+		}
+	}
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+
+</html>
