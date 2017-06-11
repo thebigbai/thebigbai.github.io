@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="baidu-site-verification" content="IPMJn3GbW9" />
+    <meta name="google-site-verification" content="5qg7SdWiFgE02QeLILrFWE25WewlG8uqdAIBMgYwn8Q" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/darcula.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/favicon/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/images/favicon/favicon.png" type="image/x-icon">
+
+    <title>The BIGBAI</title>
+	
+    <!--Library Styles-->    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/lib/font-awesome.css" rel="stylesheet">
+    <link href="/css/lib/nivo-lightbox.css" rel="stylesheet">
+    <link href="/css/lib/nivo-themes/default/default.css" rel="stylesheet">
+	
+    <!--Template Styles-->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/scheme/purple.css" rel="stylesheet">
+
+
+
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+      <script src="/js/respond.min.js"></script>
+    <![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+<body data-spy="scroll" id="top">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main-wrapper">
+		<!-- Site Navigation -->
+		<div id="menu">
+	<nav class="navbar navbar-default" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html#">
+				<img src="/images/logo.png" alt="logo">
+			</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-navbar-collapse">
+			<ul class="nav navbar-nav">
+				
+					<li><a class="nav-font-size" href="/">Home</a></li>
+				
+					<li><a class="nav-font-size" href="/archives">Archives</a></li>
+				
+					<li><a class="nav-font-size" href="/about">About</a></li>
+				
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</nav>
+</div>
+
+	  
+		<div id="container" style="max-width:100%;">
+			<section id="blog-full" class="blog">
+	<div class="row">
+		<div class="col-md-9">
+			<div id="primary" class="row">
+				<div class="blog-post">
+					<!-- Title -->
+					<h2 class="post-title">
+						<a class="article-full-color">
+							在vscode中配置Python与C++的运行环境
+						</a>
+					</h2>
+					
+					<!-- Tags and Categories links -->
+					
+					
+				
+					
+
+<div class="blog-categories-container">
+    <span class="glyphicon glyphicon-folder-open"></span>
+    <a href="/categories/Interesting-Trick/">Interesting Trick</a>
+</div>
+
+
+					<!-- Date and Author -->
+					<p class="post-meta">
+						2017-06-11
+						
+					</p>
+
+					<!-- Content -->
+					<div id="2017-06-11" class="post-content content_align">
+					
+						<!-- Table of Contents -->
+						
+						<div id="toc" class="toc-article">
+							<strong class="toc-title">Table of Content</strong>
+							<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode安装"><span class="toc-text">vscode安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python"><span class="toc-text">Python</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vscode对于raw-input-的运行与调试"><span class="toc-text">vscode对于raw_input()的运行与调试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C"><span class="toc-text">C++</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#g"><span class="toc-text">g++</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MSBuild"><span class="toc-text">MSBuild</span></a></li></ol></li></ol>
+						</div>
+						
+						
+						
+						<!--toc-->
+<p>最近发现微软的vscode编辑器貌似做得貌似越来越好了，于是也想尝试着体验下。毕竟有时候不是随时都要用集成度比较高的IDE，过于庞大，也累赘。而传说中的。<a style="color: #CD661D">编辑器之神vim，以及神之编辑器Emacs</a>，个人觉得不是太符合自己的操作习惯，于是这么看来vscode确实可以一试。用python和C++较多，就研究了一下windows/Ubuntu对于它们的配置。<br><a id="more"></a></p>
+<h2 id="vscode安装"><a href="#vscode安装" class="headerlink" title="vscode安装"></a><a style="color:#AE8D73"><strong>vscode安装</strong></a></h2><p>windows下的安装不多说了，下载安装就行了。对于ubuntu，官网下载deb文件，如下安装即可：</p>
+<pre><code>sudo dpkg -i XXXXX.deb
+</code></pre><h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a><a style="color:#AE8D73"><strong>Python</strong></a></h2><p>无论是ubuntu还是windows，python的编译配置都差不多。首先，要安装一个的插件，在extension中搜python，安装一下，非常的快。</p>
+<p>由于。<a style="color: #CD661D">vscode只是个编辑器</a>，所以编译器/解释器都是要自己先安装好的。对于python来说，就是先安装好python2.7，并配置好环境变量。对于程序文件的管理，。<a style="color: #CD661D">vscode是以文件夹来配置与管理的，可以理解为一个文件夹就是一个工作空间。</a>我们对于不同的工作空间进行配置，就可以用来run or debug不同的程序。一个简单的python工作文件夹配置完成后，其结构如下：</p>
+<pre><code>TEST -
+     |-test.py
+     |-.vscode
+            |-launch.json
+            |-tasks.json
+</code></pre><p>新建一个文件夹（TEST）并打开，假设我们在该目录下建立新的文件(ctrl+n)，名称为test.py。vscode通过tasks.json和launch.json来配置程序的运行环境。对于python来说，首先配置tasks.json。快捷键ctrl+shift+p，打开vscode的命令，输入Tasks: Configure Task Runner，选择other，tasks.json文件会自动生成,修改其内容如下：</p>
+<pre><code>    &quot;version&quot;: &quot;0.1.0&quot;,
+    &quot;command&quot;: &quot;python&quot;,
+    &quot;isShellCommand&quot;: true,
+    &quot;args&quot;: [&quot;$file&quot;],
+    &quot;showOutput&quot;: &quot;always&quot;
+</code></pre><p>回想一下我们最纯粹的运行py文件的方式，那就是：</p>
+<pre><code>python test.py
+</code></pre><p>所以，command就是python，args就是当前运行文件名。当然，如果存在多个py文件的情况下，为了避免运行乱了，可以直接把args指定为入口py文件。配置好tasks.json之后，快捷键ctrl+shift+b，即可运行。</p>
+<p>进行Dubug的配置，首先ctrl+shift+d进入debug界面，点击小齿轮，会生成一个launch.json的文件。我个人觉得默认的文件配置就可以用了。现在就可以F5进入调试，可以打断点，还不错。</p>
+<h3 id="vscode对于raw-input-的运行与调试"><a href="#vscode对于raw-input-的运行与调试" class="headerlink" title="vscode对于raw_input()的运行与调试"></a><a style="color:#AE8D73"><strong>vscode对于raw_input()的运行与调试</strong></a></h3><p>正常来说，这样的配置就很OK了，但是我发现vscode在调试python的一个小问题就是，。<a style="color: #CD661D">没有办法交互式的接受用户输入,即用raw_input(“&gt;”)的时候，就会一直卡在这里。</a>研究了一下，只能如下将就：</p>
+<blockquote>
+<ol>
+<li>如果只是运行，则不使用ctrl+shift+b方式，而是在vscode的termi下自己运行。</li>
+<li>如果是debug，则在debug界面选择 Integrated Terminal/Console 或者 External Terminal/Console，启动内部或者外部控制台来做debug。</li>
+</ol>
+</blockquote>
+<p>另外在ctrl+shift+p,中搜索preference：Open User Setting，可以打开setting.json文件。一些相关的配置可以在里面进行。以后再看吧。</p>
+<h2 id="C"><a href="#C" class="headerlink" title="C++"></a><a style="color:#AE8D73"><strong>C++</strong></a></h2><h3 id="g"><a href="#g" class="headerlink" title="g++"></a><a style="color:#AE8D73"><strong>g++</strong></a></h3><p>C++的配置，首先，vscode中安装c/c++的插件是必须的。接下来配置稍微复杂一点点，先说通用形式，即采用g++来编译。首先确保ubuntu和windows中都有g++。如果没有的话，ubuntu下可以通过apt-get的方式来安装，windows则可以安装cygwin或者mingw，一定要确保的是安装是勾选了gdb，否则之后没办法配置debug。可以使用如下命令来确认自己机器上是否有g++：</p>
+<pre><code>g++ --version
+</code></pre><p>之后的步骤可以参见python的配置，vscode打开工作文件夹，建立文件。然后配置tasks.json。假设最终配置完后，我们的文件结构如下：</p>
+<pre><code>TEST-
+    |- myHead.h
+    |- myHead.cpp
+    |- main.cpp
+    |-.vscode-
+             |-tasks.json
+             |-launch.json
+             |-c_cpp_properties.json
+</code></pre><p>myHead.h是一个自己写的类声明，myHead.cpp是类实现，main.cpp则是主函数的入口。正常来说用g++来编译该程序：</p>
+<pre><code>//windows：
+g++ -g main.cpp myHead.cpp -o main.exe
+//ubuntu：
+g++ -g main.cpp myHead.cpp -o main.o
+</code></pre><p>因此，相应的tasks.json文件，可以改为：</p>
+<pre><code>//windows:
+    &quot;version&quot;: &quot;0.1.0&quot;,
+    &quot;command&quot;: &quot;g++&quot;,
+    &quot;isShellCommand&quot;: true,
+    &quot;args&quot;: [&quot;-g&quot;,&quot;main.cpp&quot;,&quot;myHead.cpp&quot;,&quot;-o&quot;,&quot;main.exe&quot;],
+    &quot;showOutput&quot;: &quot;always&quot;
+//ubuntu:
+    &quot;version&quot;: &quot;0.1.0&quot;,
+    &quot;command&quot;: &quot;g++&quot;,
+    &quot;isShellCommand&quot;: true,
+    &quot;args&quot;: [&quot;-g&quot;,&quot;main.cpp&quot;,&quot;myHead.cpp&quot;,&quot;-o&quot;,&quot;main.o&quot;],
+    &quot;showOutput&quot;: &quot;always&quot;
+</code></pre><p>之后在debug界面，点击小齿轮选择。<a style="color: #CD661D">C++(GDB/LLDB)</a>，launch.json文件会自动生成，需要修改如下：</p>
+<pre><code>//windows:
+&quot;program&quot;: &quot;${workspaceRoot}/main.exe&quot;
+//ubuntu:
+&quot;program&quot;: &quot;${workspaceRoot}/main.o&quot;
+
+//botn win and ubuntu:
+&quot;cwd&quot;: &quot;${workspaceRoot}&quot;
+</code></pre><p>C++程序有很多include是需要包含的，如果检测不到，会报错，这些include路径可以在c_cpp_properties.json中添加，Ctrl+Shift+p，输入C/Cpp： Edit Configurations，会自动生成c_cpp_properties.json，在其中，根据对应的操作系统添加好include的path就行了。</p>
+<p>之后，可以使用ctrl—shift-b，编译出对应程序，按F5启动debug调试，设置断点。</p>
+<h3 id="MSBuild"><a href="#MSBuild" class="headerlink" title="MSBuild"></a><a style="color:#AE8D73"><strong>MSBuild</strong></a></h3><p>说到C++工程，不得不提VS的工程，如果我们拿到一个是由VS创建的工程文件夹。<a style="color: #CD661D">（含有.sln文件）</a>。怎么使用vscode来编译调试呢。g++肯定是不行了，这个时候就要使用MSBuild来配置。</p>
+<p>同样，先打开该工程文件夹。在Ctrl+Shift+p中输入Tasks: Configure Task Runner，此时。<a style="color: #CD661D">直接选择MSbuild不要选other</a>，来生成tasks.json，并修改其中的command为MSBuild.exe所在的路径:</p>
+<pre><code>&quot;version&quot;: &quot;0.1.0&quot;,
+    &quot;command&quot;: &quot;C:/Windows/Microsoft.NET/Framework64/v4.0.30319/msbuild&quot;,
+    &quot;args&quot;: [
+        // Ask msbuild to generate full paths for file names.
+        &quot;/property:GenerateFullPaths=true&quot;
+    ],
+    &quot;taskSelector&quot;: &quot;/t:&quot;,
+    &quot;showOutput&quot;: &quot;silent&quot;,
+    &quot;tasks&quot;: [
+        {
+            &quot;taskName&quot;: &quot;build&quot;,
+            // Show the output window only if unrecognized errors occur.
+            &quot;showOutput&quot;: &quot;silent&quot;,
+            // Use the standard MS compiler pattern to detect errors, warnings and infos
+            &quot;problemMatcher&quot;: &quot;$msCompile&quot;
+        }
+    ]
+</code></pre><p>之后进入debug页面，点击小齿轮，选择debug的方式为。<a style="color: #CD661D">C++(Windows)</a>，自动生成launch.json。修改program为编译以后的exe的位置：</p>
+<pre><code>&quot;program&quot;: &quot;C:/document/vscode/C++/test/Debug/test.exe&quot;
+</code></pre><p>同样，需要在C/Cpp： Edit Configurations，设置c_cpp_properties.json中的include路径，例如：</p>
+<pre><code>&quot;name&quot;: &quot;Win32&quot;,
+&quot;includePath&quot;: [
+    &quot;${workspaceRoot}&quot;,
+    &quot;C:/Program Files (x86)/Microsoft Visual Studio 11.0/VC/include&quot;
+],
+&quot;defines&quot;: [
+    &quot;_DEBUG&quot;,
+    &quot;UNICODE&quot;
+],
+&quot;browse&quot;: {
+    &quot;path&quot;: [
+    //add include path here
+        &quot;C:/Program Files (x86)/Microsoft Visual Studio 11.0/VC/include&quot;,
+        &quot;C:/Program Files (x86)/Windows Kits/8.0/Include/um&quot;
+    ],
+    &quot;limitSymbolsToIncludedHeaders&quot;: true,
+    &quot;databaseFilename&quot;: &quot;&quot;
+</code></pre><p>然后就可以运行，并调试vs工程的c++程序了。</p>
+<p>Ok, 先这么多吧，以后再研究一下用g++的时候，怎么用make来做编译调试。毕竟文件多了，make会方便一些。</p>
+
+					</div>
+					
+					
+					<p></p>
+					<div class="denote">
+						<div>
+							<img onclick="load_pic()" id="aliqcode" class="denote_img img-responsive center-block" src="" />
+						</div>
+						<a class="donate_btn" id="donate_btn" onclick="load_pic()" >￥ Donate me.</a>
+					</div>
+					<p></p>
+					<!--share-->
+					<div class="ds-share flat" data-thread-key="post-2017/06/11/在vscode中配置Python与C++的运行环境/-在vscode中配置Python与C++的运行环境" data-title="在vscode中配置Python与C++的运行环境" data-images="" data-content="" data-url="http://www.bigbai.com.cn/2017/06/11/在vscode中配置Python与C++的运行环境/">
+						<div class="ds-share-inline">
+							<div class="ds-share-icons-more">
+							</div>
+							<ul  class="ds-share-icons-16">		
+								<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">Share: </a></li>
+								<li> <a class="ds-wechat" href="javascript:void(0);" data-service="wechat">&nbsp</a> </li>
+								<li> <a class="ds-weibo" href="javascript:void(0);" data-service="weibo">&nbsp</a> </li>
+								<li> <a class="ds-facebook" href="javascript:void(0);" data-service="facebook">&nbsp</a> </li> 
+								<li> <a class="ds-twitter" href="javascript:void(0);" data-service="twitter">&nbsp</a> </li>
+								
+							</ul>
+							
+						</div>
+					 </div>
+					 <!--END SHARE-->
+
+
+					<!-- 多说评论框 start -->
+						<div class="ds-thread" data-thread-key="post-2017/06/11/在vscode中配置Python与C++的运行环境/-在vscode中配置Python与C++的运行环境" data-title="在vscode中配置Python与C++的运行环境" data-url="http://www.bigbai.com.cn/2017/06/11/在vscode中配置Python与C++的运行环境/"></div>
+						<!-- 多说评论框 end -->
+						<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+						<script type="text/javascript">
+							var duoshuoQuery = {short_name:"bigbai"};
+								(function() {
+									var ds = document.createElement('script');
+									ds.type = 'text/javascript';ds.async = true;
+									ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+									ds.charset = 'UTF-8';
+									(document.getElementsByTagName('head')[0] 
+									 || document.getElementsByTagName('body')[0]).appendChild(ds);
+								})();
+						</script>
+					<!-- 多说公共JS代码 end -->
+				</div>
+			</div>	
+		</div>
+		<!-- SIDE BAR -->
+<div class="col-md-3 sidebar">
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Categories
+				</h3>
+				<ul>
+					<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Big-Data/">Big Data</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interesting-Trick/">Interesting Trick</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Robotics/">Robotics</a><span class="category-list-count">1</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Tags
+				</h3
+				<ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SLAM/">SLAM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/">Spark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vision/">Vision</a><span class="tag-list-count">2</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Archives
+				</h3
+				<ul>
+					<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">4</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+			
+	</div>
+</section>
+
+		</div>
+		
+	</div>
+	<div>
+		<!-- BEGIN FOOTER -->
+<footer>
+	<div class="row">
+		<div class="col-md-12">
+			<p style="margin-bottom: 0">
+				© 2016 Designed by BIGBAI. Adapted to <a href="https://hexo.io/"> Hexo</a>
+			</p>             
+			<p >
+				-Friend：<a href="http://blackpoint-cx.github.io">BlackPoint</a>- 
+			</p>
+		</div>
+	</div>
+</footer>
+<!-- END FOOTER -->
+
+
+
+<!-- Back to top -->
+<div id="backtotop">       
+	<a class="to-top-btn sscroll" href="#top"><i class="fa fa-angle-double-up"></i></a>
+</div>
+	</div>
+
+    <!-- Library Scripts -->
+	<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/lib/jquery.preloader.js"></script>
+<script src="/js/lib/nivo-lightbox.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lib/jquery.superslides.min.js"></script>
+<script src="/js/lib/smoothscroll.js"></script>
+<!--<script src="/js/lib/jquery.sudoslider.min.js"></script>-->
+<script src="/js/lib/jquery.bxslider.min.js"></script>
+<script src="/js/lib/jquery.mixitup.min.js"></script>
+<script src="/js/lib/jquery.backtotop.js"></script>
+<script src="/js/lib/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script src="/js/lib/retina.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<!-- Custom Script -->    
+<script src="/js/main.js"></script>
+
+<script>
+	function load_pic()
+		{
+		var imgObj = document.getElementById("aliqcode");
+		var Flag=(imgObj.getAttribute("src",2)=="/images/wechat.jpg")
+		imgObj.src=Flag?"":"/images/wechat.jpg";
+		
+		var textObj = document.getElementById("donate_btn");
+		if(textObj.innerHTML =="Scan WeChat QR Code")
+		{
+			textObj.innerHTML ="￥ Donate me.";
+		}
+		else
+		{
+			textObj.innerHTML ="Scan WeChat QR Code";
+		}
+	}
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+
+</html>
