@@ -5,8 +5,9 @@
     <meta name="google-site-verification" content="5qg7SdWiFgE02QeLILrFWE25WewlG8uqdAIBMgYwn8Q" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="Keywords" content="BIGBAI Robotics Computer Vision Artificial Intelligence">
+    <meta name="description" content="BIGBAI's personal site sharing life and technologies about AI, Robotics, Computer Vision and Machine Learning">
+    <meta name="author" content="BIGBAI">
 	
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/darcula.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="/images/favicon/favicon.png" type="image/x-icon">
@@ -75,7 +76,7 @@
 					<!-- Title -->
 					<h2 class="post-title">
 						<a class="article-full-color">
-							在vscode中配置Python与C++的运行环境
+							��vscode������Python��C++�����л���
 						</a>
 					</h2>
 					
@@ -104,43 +105,43 @@
 						
 						<div id="toc" class="toc-article">
 							<strong class="toc-title">Table of Content</strong>
-							<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode安装"><span class="toc-text">vscode安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python"><span class="toc-text">Python</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vscode对于raw-input-的运行与调试"><span class="toc-text">vscode对于raw_input()的运行与调试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C"><span class="toc-text">C++</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#g"><span class="toc-text">g++</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MSBuild"><span class="toc-text">MSBuild</span></a></li></ol></li></ol>
+							<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode��װ"><span class="toc-text">vscode��װ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python"><span class="toc-text">Python</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vscode����raw-input-������������"><span class="toc-text">vscode����raw_input()������������</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C"><span class="toc-text">C++</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#g"><span class="toc-text">g++</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MSBuild"><span class="toc-text">MSBuild</span></a></li></ol></li></ol>
 						</div>
 						
 						
 						
 						<!--toc-->
-<p>最近发现微软的vscode编辑器貌似做得貌似越来越好了，于是也想尝试着体验下。毕竟有时候不是随时都要用集成度比较高的IDE，过于庞大，也累赘。而传说中的。<a style="color: #CD661D">编辑器之神vim，以及神之编辑器Emacs</a>，个人觉得不是太符合自己的操作习惯，于是这么看来vscode确实可以一试。用python和C++较多，就研究了一下windows/Ubuntu对于它们的配置。<br><a id="more"></a></p>
-<h2 id="vscode安装"><a href="#vscode安装" class="headerlink" title="vscode安装"></a><a style="color:#AE8D73"><strong>vscode安装</strong></a></h2><p>windows下的安装不多说了，下载安装就行了。对于ubuntu，官网下载deb文件，如下安装即可：</p>
+<p>��������΢����vscode�༭��ò������ò��Խ��Խ���ˣ�����Ҳ�볢���������¡��Ͼ���ʱ��������ʱ��Ҫ�ü��ɶȱȽϸߵ�IDE�������Ӵ���Ҳ��׸������˵�еġ�<a style="color: #CD661D">�༭��֮��vim���Լ���֮�༭��Emacs</a>�����˾��ò���̫�����Լ��Ĳ���ϰ�ߣ�������ô����vscodeȷʵ����һ�ԡ���python��C++�϶࣬���о���һ��windows/Ubuntu�������ǵ����á�<br><a id="more"></a></p>
+<h2 id="vscode��װ"><a href="#vscode��װ" class="headerlink" title="vscode��װ"></a><a style="color:#AE8D73"><strong>vscode��װ</strong></a></h2><p>windows�µİ�װ����˵�ˣ����ذ�װ�����ˡ�����ubuntu����������deb�ļ������°�װ���ɣ�</p>
 <pre><code>sudo dpkg -i XXXXX.deb
-</code></pre><h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a><a style="color:#AE8D73"><strong>Python</strong></a></h2><p>无论是ubuntu还是windows，python的编译配置都差不多。首先，要安装一个的插件，在extension中搜python，安装一下，非常的快。</p>
-<p>由于。<a style="color: #CD661D">vscode只是个编辑器</a>，所以编译器/解释器都是要自己先安装好的。对于python来说，就是先安装好python2.7，并配置好环境变量。对于程序文件的管理，。<a style="color: #CD661D">vscode是以文件夹来配置与管理的，可以理解为一个文件夹就是一个工作空间。</a>我们对于不同的工作空间进行配置，就可以用来run or debug不同的程序。一个简单的python工作文件夹配置完成后，其结构如下：</p>
+</code></pre><h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a><a style="color:#AE8D73"><strong>Python</strong></a></h2><p>������ubuntu����windows��python�ı������ö���ࡣ���ȣ�Ҫ��װһ���Ĳ�������extension����python����װһ�£��ǳ��Ŀ졣</p>
+<p>���ڡ�<a style="color: #CD661D">vscodeֻ�Ǹ��༭��</a>�����Ա�����/����������Ҫ�Լ��Ȱ�װ�õġ�����python��˵�������Ȱ�װ��python2.7�������úû������������ڳ����ļ��Ĺ�������<a style="color: #CD661D">vscode�����ļ����������������ģ���������Ϊһ���ļ��о���һ�������ռ䡣</a>���Ƕ��ڲ�ͬ�Ĺ����ռ��������ã��Ϳ�������run or debug��ͬ�ĳ�����һ���򵥵�python�����ļ����������ɺ������ṹ���£�</p>
 <pre><code>TEST -
      |-test.py
      |-.vscode
             |-launch.json
             |-tasks.json
-</code></pre><p>新建一个文件夹（TEST）并打开，假设我们在该目录下建立新的文件(ctrl+n)，名称为test.py。vscode通过tasks.json和launch.json来配置程序的运行环境。对于python来说，首先配置tasks.json。快捷键ctrl+shift+p，打开vscode的命令，输入Tasks: Configure Task Runner，选择other，tasks.json文件会自动生成,修改其内容如下：</p>
+</code></pre><p>�½�һ���ļ��У�TEST�����򿪣����������ڸ�Ŀ¼�½����µ��ļ�(ctrl+n)������Ϊtest.py��vscodeͨ��tasks.json��launch.json�����ó��������л���������python��˵����������tasks.json�����ݼ�ctrl+shift+p������vscode���������Tasks: Configure Task Runner��ѡ��other��tasks.json�ļ����Զ�����,�޸����������£�</p>
 <pre><code>    &quot;version&quot;: &quot;0.1.0&quot;,
     &quot;command&quot;: &quot;python&quot;,
     &quot;isShellCommand&quot;: true,
-    &quot;args&quot;: [&quot;$file&quot;],
+    &quot;args&quot;: [&quot;${file}&quot;],
     &quot;showOutput&quot;: &quot;always&quot;
-</code></pre><p>回想一下我们最纯粹的运行py文件的方式，那就是：</p>
+</code></pre><p>����һ���������������py�ļ��ķ�ʽ���Ǿ��ǣ�</p>
 <pre><code>python test.py
-</code></pre><p>所以，command就是python，args就是当前运行文件名。当然，如果存在多个py文件的情况下，为了避免运行乱了，可以直接把args指定为入口py文件。配置好tasks.json之后，快捷键ctrl+shift+b，即可运行。</p>
-<p>进行Dubug的配置，首先ctrl+shift+d进入debug界面，点击小齿轮，会生成一个launch.json的文件。我个人觉得默认的文件配置就可以用了。现在就可以F5进入调试，可以打断点，还不错。</p>
-<h3 id="vscode对于raw-input-的运行与调试"><a href="#vscode对于raw-input-的运行与调试" class="headerlink" title="vscode对于raw_input()的运行与调试"></a><a style="color:#AE8D73"><strong>vscode对于raw_input()的运行与调试</strong></a></h3><p>正常来说，这样的配置就很OK了，但是我发现vscode在调试python的一个小问题就是，。<a style="color: #CD661D">没有办法交互式的接受用户输入,即用raw_input(“&gt;”)的时候，就会一直卡在这里。</a>研究了一下，只能如下将就：</p>
+</code></pre><p>���ԣ�command����python��args���ǵ�ǰ�����ļ�������Ȼ���������ڶ���py�ļ��������£�Ϊ�˱����������ˣ�����ֱ�Ӱ�argsָ��Ϊ����py�ļ������ú�tasks.json֮�󣬿��ݼ�ctrl+shift+b���������С�</p>
+<p>����Dubug�����ã�����ctrl+shift+d����debug���棬����С���֣�������һ��launch.json���ļ����Ҹ��˾���Ĭ�ϵ��ļ����þͿ������ˡ����ھͿ���F5�������ԣ����Դ��ϵ㣬��������</p>
+<h3 id="vscode����raw-input-������������"><a href="#vscode����raw-input-������������" class="headerlink" title="vscode����raw_input()������������"></a><a style="color:#AE8D73"><strong>vscode����raw_input()������������</strong></a></h3><p>������˵�����������þͺ�OK�ˣ������ҷ���vscode�ڵ���python��һ��С�������ǣ���<a style="color: #CD661D">û�а취����ʽ�Ľ����û�����,����raw_input(“&gt;”)��ʱ�򣬾ͻ�һֱ�������</a>�о���һ�£�ֻ�����½��ͣ�</p>
 <blockquote>
 <ol>
-<li>如果只是运行，则不使用ctrl+shift+b方式，而是在vscode的termi下自己运行。</li>
-<li>如果是debug，则在debug界面选择 Integrated Terminal/Console 或者 External Terminal/Console，启动内部或者外部控制台来做debug。</li>
+<li>����ֻ�����У�����ʹ��ctrl+shift+b��ʽ��������vscode��termi���Լ����С�</li>
+<li>������debug������debug����ѡ�� Integrated Terminal/Console ���� External Terminal/Console�������ڲ������ⲿ����̨����debug��</li>
 </ol>
 </blockquote>
-<p>另外在ctrl+shift+p,中搜索preference：Open User Setting，可以打开setting.json文件。一些相关的配置可以在里面进行。以后再看吧。</p>
-<h2 id="C"><a href="#C" class="headerlink" title="C++"></a><a style="color:#AE8D73"><strong>C++</strong></a></h2><h3 id="g"><a href="#g" class="headerlink" title="g++"></a><a style="color:#AE8D73"><strong>g++</strong></a></h3><p>C++的配置，首先，vscode中安装c/c++的插件是必须的。接下来配置稍微复杂一点点，先说通用形式，即采用g++来编译。首先确保ubuntu和windows中都有g++。如果没有的话，ubuntu下可以通过apt-get的方式来安装，windows则可以安装cygwin或者mingw，一定要确保的是安装是勾选了gdb，否则之后没办法配置debug。可以使用如下命令来确认自己机器上是否有g++：</p>
+<p>������ctrl+shift+p,������preference��Open User Setting�����Դ���setting.json�ļ���һЩ���ص����ÿ������������С��Ժ��ٿ��ɡ�</p>
+<h2 id="C"><a href="#C" class="headerlink" title="C++"></a><a style="color:#AE8D73"><strong>C++</strong></a></h2><h3 id="g"><a href="#g" class="headerlink" title="g++"></a><a style="color:#AE8D73"><strong>g++</strong></a></h3><p>C++�����ã����ȣ�vscode�а�װc/c++�Ĳ����Ǳ����ġ�������������΢����һ���㣬��˵ͨ����ʽ��������g++�����롣����ȷ��ubuntu��windows�ж���g++������û�еĻ���ubuntu�¿���ͨ��apt-get�ķ�ʽ����װ��windows�����԰�װcygwin����mingw��һ��Ҫȷ�����ǰ�װ�ǹ�ѡ��gdb������֮��û�취����debug������ʹ������������ȷ���Լ��������Ƿ���g++��</p>
 <pre><code>g++ --version
-</code></pre><p>之后的步骤可以参见python的配置，vscode打开工作文件夹，建立文件。然后配置tasks.json。假设最终配置完后，我们的文件结构如下：</p>
+</code></pre><p>֮���Ĳ������Բμ�python�����ã�vscode�򿪹����ļ��У������ļ���Ȼ������tasks.json�����������������������ǵ��ļ��ṹ���£�</p>
 <pre><code>TEST-
     |- myHead.h
     |- myHead.cpp
@@ -149,12 +150,12 @@
              |-tasks.json
              |-launch.json
              |-c_cpp_properties.json
-</code></pre><p>myHead.h是一个自己写的类声明，myHead.cpp是类实现，main.cpp则是主函数的入口。正常来说用g++来编译该程序：</p>
-<pre><code>//windows：
+</code></pre><p>myHead.h��һ���Լ�д����������myHead.cpp����ʵ�֣�main.cpp���������������ڡ�������˵��g++�������ó�����</p>
+<pre><code>//windows��
 g++ -g main.cpp myHead.cpp -o main.exe
-//ubuntu：
+//ubuntu��
 g++ -g main.cpp myHead.cpp -o main.o
-</code></pre><p>因此，相应的tasks.json文件，可以改为：</p>
+</code></pre><p>���ˣ���Ӧ��tasks.json�ļ������Ը�Ϊ��</p>
 <pre><code>//windows:
     &quot;version&quot;: &quot;0.1.0&quot;,
     &quot;command&quot;: &quot;g++&quot;,
@@ -167,7 +168,7 @@ g++ -g main.cpp myHead.cpp -o main.o
     &quot;isShellCommand&quot;: true,
     &quot;args&quot;: [&quot;-g&quot;,&quot;main.cpp&quot;,&quot;myHead.cpp&quot;,&quot;-o&quot;,&quot;main.o&quot;],
     &quot;showOutput&quot;: &quot;always&quot;
-</code></pre><p>之后在debug界面，点击小齿轮选择。<a style="color: #CD661D">C++(GDB/LLDB)</a>，launch.json文件会自动生成，需要修改如下：</p>
+</code></pre><p>֮����debug���棬����С����ѡ����<a style="color: #CD661D">C++(GDB/LLDB)</a>��launch.json�ļ����Զ����ɣ���Ҫ�޸����£�</p>
 <pre><code>//windows:
 &quot;program&quot;: &quot;${workspaceRoot}/main.exe&quot;
 //ubuntu:
@@ -175,10 +176,10 @@ g++ -g main.cpp myHead.cpp -o main.o
 
 //botn win and ubuntu:
 &quot;cwd&quot;: &quot;${workspaceRoot}&quot;
-</code></pre><p>C++程序有很多include是需要包含的，如果检测不到，会报错，这些include路径可以在c_cpp_properties.json中添加，Ctrl+Shift+p，输入C/Cpp： Edit Configurations，会自动生成c_cpp_properties.json，在其中，根据对应的操作系统添加好include的path就行了。</p>
-<p>之后，可以使用ctrl—shift-b，编译出对应程序，按F5启动debug调试，设置断点。</p>
-<h3 id="MSBuild"><a href="#MSBuild" class="headerlink" title="MSBuild"></a><a style="color:#AE8D73"><strong>MSBuild</strong></a></h3><p>说到C++工程，不得不提VS的工程，如果我们拿到一个是由VS创建的工程文件夹。<a style="color: #CD661D">（含有.sln文件）</a>。怎么使用vscode来编译调试呢。g++肯定是不行了，这个时候就要使用MSBuild来配置。</p>
-<p>同样，先打开该工程文件夹。在Ctrl+Shift+p中输入Tasks: Configure Task Runner，此时。<a style="color: #CD661D">直接选择MSbuild不要选other</a>，来生成tasks.json，并修改其中的command为MSBuild.exe所在的路径:</p>
+</code></pre><p>C++�����кܶ�include����Ҫ�����ģ��������ⲻ�����ᱨ������Щinclude·��������c_cpp_properties.json�����ӣ�Ctrl+Shift+p������C/Cpp�� Edit Configurations�����Զ�����c_cpp_properties.json�������У����ݶ�Ӧ�Ĳ���ϵͳ���Ӻ�include��path�����ˡ�</p>
+<p>֮�󣬿���ʹ��ctrl��shift-b����������Ӧ���򣬰�F5����debug���ԣ����öϵ㡣</p>
+<h3 id="MSBuild"><a href="#MSBuild" class="headerlink" title="MSBuild"></a><a style="color:#AE8D73"><strong>MSBuild</strong></a></h3><p>˵��C++���̣����ò���VS�Ĺ��̣����������õ�һ������VS�����Ĺ����ļ��С�<a style="color: #CD661D">������.sln�ļ���</a>����ôʹ��vscode�����������ء�g++�϶��ǲ����ˣ�����ʱ����Ҫʹ��MSBuild�����á�</p>
+<p>ͬ�����ȴ򿪸ù����ļ��С���Ctrl+Shift+p������Tasks: Configure Task Runner����ʱ��<a style="color: #CD661D">ֱ��ѡ��MSbuild��Ҫѡother</a>��������tasks.json�����޸����е�commandΪMSBuild.exe���ڵ�·��:</p>
 <pre><code>&quot;version&quot;: &quot;0.1.0&quot;,
     &quot;command&quot;: &quot;C:/Windows/Microsoft.NET/Framework64/v4.0.30319/msbuild&quot;,
     &quot;args&quot;: [
@@ -196,9 +197,9 @@ g++ -g main.cpp myHead.cpp -o main.o
             &quot;problemMatcher&quot;: &quot;$msCompile&quot;
         }
     ]
-</code></pre><p>之后进入debug页面，点击小齿轮，选择debug的方式为。<a style="color: #CD661D">C++(Windows)</a>，自动生成launch.json。修改program为编译以后的exe的位置：</p>
+</code></pre><p>֮������debugҳ�棬����С���֣�ѡ��debug�ķ�ʽΪ��<a style="color: #CD661D">C++(Windows)</a>���Զ�����launch.json���޸�programΪ�����Ժ���exe��λ�ã�</p>
 <pre><code>&quot;program&quot;: &quot;C:/document/vscode/C++/test/Debug/test.exe&quot;
-</code></pre><p>同样，需要在C/Cpp： Edit Configurations，设置c_cpp_properties.json中的include路径，例如：</p>
+</code></pre><p>ͬ������Ҫ��C/Cpp�� Edit Configurations������c_cpp_properties.json�е�include·�������磺</p>
 <pre><code>&quot;name&quot;: &quot;Win32&quot;,
 &quot;includePath&quot;: [
     &quot;${workspaceRoot}&quot;,
@@ -216,8 +217,8 @@ g++ -g main.cpp myHead.cpp -o main.o
     ],
     &quot;limitSymbolsToIncludedHeaders&quot;: true,
     &quot;databaseFilename&quot;: &quot;&quot;
-</code></pre><p>然后就可以运行，并调试vs工程的c++程序了。</p>
-<p>Ok, 先这么多吧，以后再研究一下用g++的时候，怎么用make来做编译调试。毕竟文件多了，make会方便一些。</p>
+</code></pre><p>Ȼ���Ϳ������У�������vs���̵�c++�����ˡ�</p>
+<p>Ok, ����ô���ɣ��Ժ����о�һ����g++��ʱ������ô��make�����������ԡ��Ͼ��ļ����ˣ�make�᷽��һЩ��</p>
 
 					</div>
 					
@@ -247,7 +248,7 @@ g++ -g main.cpp myHead.cpp -o main.o
 						data_track_clickback:true,
 						summary:"",
 						url:"http://www.bigbai.com.cn/2017/06/11/在vscode中配置Python与C++的运行环境/",
-						title: "在vscode中配置Python与C++的运行环境",
+						title: "��vscode������Python��C++�����л���",
 						shortUrl:false,
 						hideMore:false
 					}
