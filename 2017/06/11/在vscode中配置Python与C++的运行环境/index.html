@@ -105,7 +105,7 @@
 						
 						<div id="toc" class="toc-article">
 							<strong class="toc-title">Table of Content</strong>
-							<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode安装"><span class="toc-text">vscode安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python"><span class="toc-text">Python</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vscode对于raw-input-的运行与调试"><span class="toc-text">vscode对于raw_input()的运行与调试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C"><span class="toc-text">C++</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#g"><span class="toc-text">g++</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MSBuild"><span class="toc-text">MSBuild</span></a></li></ol></li></ol>
+							<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode安装"><span class="toc-text">vscode安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python"><span class="toc-text">Python</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vscode对于raw-input-的运行与调试"><span class="toc-text">vscode对于raw_input()的运行与调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python2与python3切换"><span class="toc-text">python2与python3切换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C"><span class="toc-text">C++</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#g"><span class="toc-text">g++</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MSBuild"><span class="toc-text">MSBuild</span></a></li></ol></li></ol>
 						</div>
 						
 						
@@ -138,8 +138,39 @@
 <li>如果是debug，则在debug界面选择 Integrated Terminal/Console 或者 External Terminal/Console，启动内部或者外部控制台来做debug。</li>
 </ol>
 </blockquote>
-<p>另外在ctrl+shift+p,中搜索preference：Open User Setting，可以打开setting.json文件。一些相关的配置可以在里面进行。以后再看吧。</p>
-<h2 id="C"><a href="#C" class="headerlink" title="C++"></a><a style="color:#AE8D73"><strong>C++</strong></a></h2><h3 id="g"><a href="#g" class="headerlink" title="g++"></a><a style="color:#AE8D73"><strong>g++</strong></a></h3><p>C++的配置，首先，vscode中安装c/c++的插件是必须的。接下来配置稍微复杂一点点，先说通用形式，即采用g++来编译。首先确保ubuntu和windows中都有g++。如果没有的话，ubuntu下可以通过apt-get的方式来安装，windows则可以安装cygwin或者mingw，一定要确保的是安装是勾选了gdb，否则之后没办法配置debug。可以使用如下命令来确认自己机器上是否有g++：</p>
+<h3 id="python2与python3切换"><a href="#python2与python3切换" class="headerlink" title="python2与python3切换"></a><a style="color:#AE8D73"><strong>python2与python3切换</strong></a></h3><p>最近安装了miniconda的python3的环境，有时候想在vscode里面用不同版本的python进行调试。简单研究了一下，主要需要的配置如下，假设系统（例如ubuntu默认的python是python3），即终端下：</p>
+<pre><code>viki@c3po:~$ python --version
+Python 3.6.3 :: Anaconda, Inc.
+</code></pre><p>则按照上述配置后的vscode环境将会默认用该版本的python运行。但是我miniconda的python3环境是需要手动激活的：</p>
+<pre><code>source activation miniconda/envs/{yourconda}
+</code></pre><p>因此，虽然默认会调用该版本的python3，但是相应的库却不一定会包含进来，例如numpy之类的。因此解决的办法是在task.json中直接指明command路径：</p>
+<pre><code>{
+    &quot;version&quot;: &quot;0.1.0&quot;,
+    &quot;command&quot;: &quot;{condaPath}/envs/carnd-term1/bin/python3&quot;,
+    &quot;isShellCommand&quot;: true,
+    &quot;args&quot;: [&quot;main.py&quot;],
+    &quot;showOutput&quot;: &quot;always&quot;
+}
+</code></pre><p>如果需要切换到python2环境，task.json中将command写明为python2：</p>
+<pre><code>{
+    &quot;version&quot;: &quot;0.1.0&quot;,
+    &quot;command&quot;: &quot;python2&quot;,
+    &quot;isShellCommand&quot;: true,
+    &quot;args&quot;: [&quot;main.py&quot;],
+    &quot;showOutput&quot;: &quot;always&quot;
+}
+</code></pre><p>这样设置以后，利用ctrl+shift+b程序就会按照对应的python版本来运行。</p>
+<p>再说一下debug的问题，task.json管理的是运行的问题，debug情况下(即用f5调试)，也需要在launch.json中，修改pythonPath为对应要用的版本：</p>
+<pre><code>    &quot;name&quot;: &quot;Python&quot;,
+    &quot;type&quot;: &quot;python&quot;,
+    &quot;request&quot;: &quot;launch&quot;,
+    &quot;stopOnEntry&quot;: true,
+    &quot;python.pythonPath&quot;: &quot;{condaPath}/envs/carnd-term1/bin/python3&quot;,
+    &quot;program&quot;: &quot;${file}&quot;,
+</code></pre><p>另外在ctrl+shift+p,中搜索preference：Open User Setting，可以打开setting.json文件，可以修改其中的pythonPath，貌似是个一了百了的方法：</p>
+<pre><code>&quot;python.pythonPath&quot;: &quot;{yourpython3Path}/python3&quot; //Python3
+&quot;python.pythonPath&quot;: &quot;{yourpython3Path}/python2&quot; //Python2
+</code></pre><h2 id="C"><a href="#C" class="headerlink" title="C++"></a><a style="color:#AE8D73"><strong>C++</strong></a></h2><h3 id="g"><a href="#g" class="headerlink" title="g++"></a><a style="color:#AE8D73"><strong>g++</strong></a></h3><p>C++的配置，首先，vscode中安装c/c++的插件是必须的。接下来配置稍微复杂一点点，先说通用形式，即采用g++来编译。首先确保ubuntu和windows中都有g++。如果没有的话，ubuntu下可以通过apt-get的方式来安装，windows则可以安装cygwin或者mingw，一定要确保的是安装是勾选了gdb，否则之后没办法配置debug。可以使用如下命令来确认自己机器上是否有g++：</p>
 <pre><code>g++ --version
 </code></pre><p>之后的步骤可以参见python的配置，vscode打开工作文件夹，建立文件。然后配置tasks.json。假设最终配置完后，我们的文件结构如下：</p>
 <pre><code>TEST-
