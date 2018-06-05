@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="baidu-site-verification" content="IPMJn3GbW9" />
+    <meta name="google-site-verification" content="5qg7SdWiFgE02QeLILrFWE25WewlG8uqdAIBMgYwn8Q" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Keywords" content="BIGBAI Robotics Computer Vision Artificial Intelligence">
+    <meta name="description" content="BIGBAI's personal site sharing life and technologies about AI, Robotics, Computer Vision and Machine Learning">
+    <meta name="author" content="BIGBAI">
+	
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/darcula.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/favicon/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/images/favicon/favicon.png" type="image/x-icon">
+
+    <title>The BIGBAI</title>
+	
+    <!--Library Styles-->    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/lib/font-awesome.css" rel="stylesheet">
+    <link href="/css/lib/nivo-lightbox.css" rel="stylesheet">
+    <link href="/css/lib/nivo-themes/default/default.css" rel="stylesheet">
+	
+    <!--Template Styles-->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/scheme/purple.css" rel="stylesheet">
+
+
+
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+      <script src="/js/respond.min.js"></script>
+    <![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+<body data-spy="scroll" id="top">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="main-wrapper">
+		<!-- Site Navigation -->
+		<div id="menu">
+	<nav class="navbar navbar-default" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html#">
+				<img src="/images/logo.png" alt="logo">
+			</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-navbar-collapse">
+			<ul class="nav navbar-nav">
+				
+					<li><a class="nav-font-size" href="/">Home</a></li>
+				
+					<li><a class="nav-font-size" href="/archives">Archives</a></li>
+				
+					<li><a class="nav-font-size" href="/about">About</a></li>
+				
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</nav>
+</div>
+
+	  
+		<div id="container" style="max-width:100%;">
+			<section id="blog-full" class="blog">
+	<div class="row">
+		<div class="col-md-9">
+			<div id="primary" class="row">
+				<div class="blog-post">
+					<!-- Title -->
+					<h2 class="post-title">
+						<a class="article-full-color">
+							Deep learning - From the Beginning
+						</a>
+					</h2>
+					
+					<!-- Tags and Categories links -->
+					
+					
+
+<div class="blog-tags-container">
+    <span class="glyphicon glyphicon-tags"></span>
+    <a href="/tags/Vision/">#Vision</a> <a href="/tags/Python/">#Python</a>
+</div>
+
+				
+					
+
+<div class="blog-categories-container">
+    <span class="glyphicon glyphicon-folder-open"></span>
+    <a href="/categories/Deep-Learning/">Deep Learning</a>
+</div>
+
+
+					<!-- Date and Author -->
+					<p class="post-meta">
+						2018-05-17
+						
+					</p>
+
+					<!-- Content -->
+					<div id="2018-05-17" class="post-content content_align">
+					
+						<!-- Table of Contents -->
+						
+						<div id="toc" class="toc-article">
+							<strong class="toc-title">Table of Content</strong>
+							<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNN-Structure"><span class="toc-text">DNN Structure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Forward-Propagation"><span class="toc-text">Forward Propagation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linear-Forward"><span class="toc-text">Linear Forward</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Activated-Forward"><span class="toc-text">Activated Forward</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Matrices-Dimension-in-FP"><span class="toc-text">Matrices Dimension in FP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cost-Function"><span class="toc-text">Cost Function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Backward-Propagation"><span class="toc-text">Backward Propagation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Activated-Backward"><span class="toc-text">Activated Backward</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linear-Backward"><span class="toc-text">Linear Backward</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Parameters-Update"><span class="toc-text">Parameters Update</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-text">Summary</span></a></li></ol>
+						</div>
+						
+						
+						
+						<!-- toc -->
+<p><script type="text/javascript" src="http://mathjax.josephjctang.com/MathJax.js?config=default"> </script><br>It has been a long time since last update. In my recent work, I want to intuitively understand how deep learning work rather than using some deep learning frameworks. Therefore, I decide to program the deep learning code <a style="color: #CD661D">from the very beginning</a>. After referring the tutorial of <a href="https://www.deeplearning.ai/" target="_blank" rel="external">Andrew Ng</a>, I write a simple DNN code for cat classification. The source code can be downloaded <a href="https://github.com/thebigbai/Deep-Learning-Code/tree/master/DNN" target="_blank" rel="external">here</a>.<br><a id="more"></a></p>
+<h2 id="DNN-Structure"><a href="#DNN-Structure" class="headerlink" title="DNN Structure"></a><a style="color:#AE8D73"><strong>DNN Structure</strong></a></h2><p>This is a full-connected DNN consisted of one input layer, one output layer and multiple hidden layers. The input layer is the standardized image2vector which is reshaped from the image \((x,y,channel)\) to \((x*y*channel,1)\). The output layer is a <a style="color: #CD661D">probability</a> to show whether the input image is a cat or not. The L-layer DNN structure is shown below.</p>
+<div style="text-align:center"><br><img src="https://od.lk/d/127774942_Dp9Ow/DNN.png" alt="DNN"><br></div>
+
+<p>In my case, the input image is 64*64 with RGB channel, <a style="color: #CD661D">so the image2vector is (12288,1)</a>. The activation function of the last layer is <a style="color: #CD661D">sigmoid</a> fucntion, the rest layers are <a style="color: #CD661D">ReLU</a> function.</p>
+<pre><code class="Python">nn_layers=[12288,20,7,5,3,1]
+nn_actication=[&quot;relu&quot;,&quot;relu&quot;,&quot;relu&quot;,&quot;relu&quot;,&quot;sigmoid&quot;]
+</code></pre>
+<p>There are 6 layers in this DNN. Input layer has 12288 entrances, followed by 20 neurons in the 2nd layer, 7 neurons in the 3rd layer and so forth. The output layer (the 6th layer) has one neuron and can be activated by sigmoid function.</p>
+<h2 id="Forward-Propagation"><a href="#Forward-Propagation" class="headerlink" title="Forward Propagation"></a><a style="color:#AE8D73"><strong>Forward Propagation</strong></a></h2><p>Forward propagation contains two parts:</p>
+<blockquote>
+<ul>
+<li>Linear Forward</li>
+<li>Activated Forward</li>
+</ul>
+</blockquote>
+<h3 id="Linear-Forward"><a href="#Linear-Forward" class="headerlink" title="Linear Forward"></a><a style="color:#AE8D73"><strong>Linear Forward</strong></a></h3><p>Similar to logistic regression, linear forward can be calculated by:<br>$$<br>Z^{l}=W^{l}A^{l-1}+b^{l}<br>$$<br>Where \(W^{l}\) is the weighted parameters and \(b^{l}\) is the bias in layer \(l\). The \(A^{l-1}\) is the output of layer \(l-1\). <a style="color: #CD661D">The input image2vector \(X\) can be treated as \(A^{0}\)</a>. Here is the Python code:</p>
+<pre><code class="python">def linear_forward(A,W,b):
+    Z=np.dot(W,A)+b
+    return Z
+</code></pre>
+<h3 id="Activated-Forward"><a href="#Activated-Forward" class="headerlink" title="Activated Forward"></a><a style="color:#AE8D73"><strong>Activated Forward</strong></a></h3><p>There are variety of options for the activation function, such as ReLU, Tanh, and Sigmoid. In my case, I use ReLU in most layers <a style="color: #CD661D">but the output layer</a> which I use the Sigmoid function. Following is the code:</p>
+<pre><code class="Python">def relu(Z):
+    A = np.maximum(0,Z)
+    assert(A.shape == Z.shape)
+    return A
+
+def sigmoid(Z):
+    A=1/(1+np.exp(-Z))
+    assert(A.shape==Z.shape)
+    return A
+</code></pre>
+<h3 id="Matrices-Dimension-in-FP"><a href="#Matrices-Dimension-in-FP" class="headerlink" title="Matrices Dimension in FP"></a><a style="color:#AE8D73"><strong>Matrices Dimension in FP</strong></a></h3><p><a style="color: #CD661D">In order to accelarate the training rate, vectorization is  very common in deep learning</a>; therefore, we need to figure out the dimensions of matrices we applied in the deep learning network. Here take a simple model as an example.</p>
+<div style="text-align:center"><br><img src="https://od.lk/d/127774941_DEekp/3layer.png" alt="3layers"><br></div>
+
+<p> Assuming that there are \(m\) images in trainning set, the DNN structure is [12288,7,1]. We need to figure out <a style="color: #CD661D">the dimensions of the \(A^{l}\), \(W^{l}\), \(b^{l}\), \(Z^{l}\) and \(\hat{Y}\)</a>.</p>
+<p> First, for the input layer, it depend on the size of image. For example, if one image is 64*64 with RGB channel, it can be vectorized as a vector with shape \((12288,1)\). <a style="color: #CD661D">There are \(m\) training images; therefore the input matrix \(X=A^{0}\) is with shape \((12288,m)\)</a>.</p>
+<div style="text-align:center"><br><img src="https://od.lk/d/127774940_wEevc/X.png" alt="Input X"><br></div>
+
+<p>Similar to \(X=A^{0}\), the \(A^{1}\) can be also deduced as a matrix with shape \((7,m)\) and the \(\hat{Y}=A^{2}\) is \((1,m)\). In the activated forward, we only activate \(Z^{l}\) to \(A^{l}\). It does not change the shape of \(Z^{l}\), <a style="color: #CD661D">therefore the shape of \(Z^{l}\) is the same to the shape of \(A^{l}\)</a>.</p>
+<p>The \(W^{l}\) and \(b^{l}\) connect \(A^{l-1}\) to \(Z^{l}\). For example, to transform  \(A^{0}(12288,m)\) matrix to \(Z^{1}(7,m)\) matrix, the \(W^{1}\) should be the shape of (7,12288), and \(b^{1}\) should be shape of \((7,1)\). </p>
+<p>Sum it up, the shape of matrices in the <a style="color: #CD661D">full-connected deep learning:</a><br>$$<br>A^{l}.shape=(N^{l},m)\\<br>Z^{l}.shape=A^{l}\\<br>b^{l}.shape=(N^{l},1)\\<br>W^{l}.shape=(N^{l},N^{l-1})<br>$$<br>Where \(N^{l}\) is <a style="color: #CD661D">the number of neurons in layer \(l\) and \(m\) is the number of training images</a>. Based on this, the DNN parameters can be initilized if we know the DNN structure.</p>
+<pre><code class="Python">def init_param(nn_layers):
+    np.random.seed(1)
+    param={}
+
+    for i in range(1,len(nn_layers)):
+        param[&quot;W&quot;+str(i)]=np.random.randn(nn_layers[i],nn_layers[i-1])/np.sqrt(nn_layers[i-1])
+        param[&quot;b&quot;+str(i)]=np.zeros((nn_layers[i],1))
+
+        assert(param[&quot;W&quot;+str(i)].shape==(nn_layers[i],nn_layers[i-1]))
+        assert(param[&quot;b&quot;+str(i)].shape==(nn_layers[i],1))
+
+    return param
+</code></pre>
+<h2 id="Cost-Function"><a href="#Cost-Function" class="headerlink" title="Cost Function"></a><a style="color:#AE8D73"><strong>Cost Function</strong></a></h2><p>Cost function can help us check if the DNN model is actually learning. The value of cost function should be decend in each iteration. In my case, I use corss-entropy cost \(J\) to check \(\hat{Y}\) and the ground truth \(Y\). There are \(m\) training image, so we need to check their <a style="color: #CD661D">average cost</a>:<br>$$<br>J=-\frac{1}{m}\sum_{1}^{m}(Y^{i}log(\hat{Y^{i}})+(1-Y^{i})log(1-\hat{Y^{i}}))<br>$$</p>
+<pre><code class="Python">def compute_cost(A_cache,Y):
+    L=len(A_cache)-1
+    A=A_cache[&quot;A&quot;+str(L)] # get Y hat = last A
+    m=Y.shape[1]
+
+    cost=(-1.0/m)*np.sum(Y*np.log(A)+(1-Y)*np.log(1-A)) # use 1.0 is very important
+
+    return cost
+</code></pre>
+<h2 id="Backward-Propagation"><a href="#Backward-Propagation" class="headerlink" title="Backward Propagation"></a><a style="color:#AE8D73"><strong>Backward Propagation</strong></a></h2><p>Backward propagation is used to calculate the gradient of the cost fucntion with respect to the parameter \(W\) and \(b\). <a style="color: #CD661D">At first, we need to calculate the gradient respected to the \(\hat{Y}\), the last layer output,treated as \(A^{L}\)</a>:<br>$$<br>dA^{L}=\frac{\partial{J}}{\partial{A^{L}}}=<br>-(\frac{Y}{A^{L}}-\frac{1-Y}{1-A^{L}})<br>$$<br>Next, according to <a style="color: #CD661D">chain rule</a>, the gradient can be calculated layer by layer. The backward propagation contains two parts:</p>
+<blockquote>
+<ul>
+<li>Activated backward</li>
+<li>Linear backward</li>
+</ul>
+</blockquote>
+<h3 id="Activated-Backward"><a href="#Activated-Backward" class="headerlink" title="Activated Backward"></a><a style="color:#AE8D73"><strong>Activated Backward</strong></a></h3><p>For layer \(l\), <a style="color: #CD661D">assuming that the \(dA^{l}\) is already know</a>. If the \(g(.)\) is the activation function, \(dZ^{l}\) can be caculated by:<br>$$<br>dZ^{l}=dA^{l}*g’(Z^{l})<br>$$<br>For ReLU and Sigmoid function, the derivative can be calculated by:<br>$$<br>RuLU’(z)= \begin{cases}<br>1 &amp; \text{ if } z&gt;0 \\<br>0 &amp; \text{ if } z&lt;=0<br>\end{cases}<br>$$<br>$$<br>Sigmoid’(z)=Sigmoid(z)(1-Sigmoid(z))<br>$$<br>Below is the python code in my case:</p>
+<pre><code class="Python">def partial_relu(Z):
+    Z[Z&lt;=0]=0
+    Z[Z&gt;0]=1
+    pZ=Z
+    assert(pZ.shape == Z.shape)
+    return pZ
+
+def partial_sigmoid(Z):
+    A=sigmoid(Z)
+    pZ=A*(1-A)
+    assert(pZ.shape == Z.shape)
+    return pZ
+
+def activate_backward(dA,Z,mode):
+    if mode==&quot;sigmoid&quot;:
+        pZ=partial_sigmoid(Z)
+        dZ=dA*pZ
+    if mode==&quot;relu&quot;:
+        pZ=partial_relu(Z)
+        dZ=dA*pZ
+
+    return dZ
+</code></pre>
+<h3 id="Linear-Backward"><a href="#Linear-Backward" class="headerlink" title="Linear Backward"></a><a style="color:#AE8D73"><strong>Linear Backward</strong></a></h3><p>For layer \(l\), <a style="color: #CD661D">assuming that the \(dZ^{l}\) is already know</a>. The \(dW^{l}\) and \(db^{l}\) can be calculated by:<br>$$<br>dW^{l}=dZ^{l}*A^{l-1}/m\\<br>db^{l}=dZ^{l}/m<br>$$</p>
+<p>We have \(m\) training data, so <a style="color: #CD661D">\(dW^{l}\) is a \((N^{l},m)\) matrix and \(db^{l}\) is a \((1,m)\) matrix, which is the reason to divide by \(m\)</a>. It is also necessary to calculate \(dA^{l}\), because the \(dA^{l}\) is used for activated backward in layer \(l-1\).<br>$$<br>dA^{l}=W^{l}.^{T}*dZ^{l}<br>$$<br>Here is the code for linear backward:</p>
+<pre><code class="Python">def linear_backward(dZ,A_pre,W):
+    m=dZ.shape[1]
+    dW=np.dot(dZ,A_pre.T)/m
+    dB=np.sum(dZ,axis=1,keepdims=True)/m
+    dA=np.dot(W.T,dZ)
+
+    assert(dA.shape==A_pre.shape)
+    assert(dW.shape==W.shape)
+
+    return dA,dW,dB
+</code></pre>
+<h2 id="Parameters-Update"><a href="#Parameters-Update" class="headerlink" title="Parameters Update"></a><a style="color:#AE8D73"><strong>Parameters Update</strong></a></h2><p>For each iteration, the parameters should be updated by the gradient calculated in backward propagation. In gradient descend, learning rate is another parameter to control the network learning efficiency. If learning rate is too small, the training rate would be very slow. If it is too large, the network would not be able to convergence to good result.</p>
+<pre><code class="Python">def update_param(param,grads,learning_rate):
+    L=len(param)//2 # get the number of layers
+
+    for i in range(L):
+        param[&quot;W&quot;+str(i+1)]=param[&quot;W&quot;+str(i+1)]-learning_rate*grads[&quot;dW&quot;+str(i+1)]
+        param[&quot;b&quot;+str(i+1)]=param[&quot;b&quot;+str(i+1)]-learning_rate*grads[&quot;dB&quot;+str(i+1)]
+
+    return param
+</code></pre>
+<p>The ‘param’ contains all the \(W,b\) in forward propagation, and ‘grads’ contains all the \(dW,db,dA\) in backward propagation. In my case, learning rate is 0.0075.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a><a style="color:#AE8D73"><strong>Summary</strong></a></h2><p>Here is the programming flow chat. For each layer \(l\), the input is \(A^{l-1}\) and the output is \(A^{l}\). The linear forward result \(Z^{l}\) can <a style="color: #CD661D">be stored in the cache</a>. When doing backward propagation, the input is \(dA^{l}\) and the output is \(dA^{l-1}\). The \(dZ^{l}\) is very easy to be caculated by using \(Z^{l}\) in the cache. Similarly, the \(dW^{l}\) and \(db^{l}\) also need \(A^{l-1}\) in the cache. </p>
+<p><div style="text-align:center"><br><img src="https://od.lk/d/127774943_a0zW8/Program.png" alt="Flow Chat"><br></div><br>Ok, that is the process of how I program the full-connected DNN. The program code can be found in <a href="https://github.com/thebigbai/Deep-Learning-Code/tree/master/DNN" target="_blank" rel="external">Github here</a>.</p>
+
+					</div>
+					
+					
+					<p></p>
+					<div class="denote">
+						<div>
+							<img onclick="load_pic()" id="aliqcode" class="denote_img img-responsive center-block" src="" />
+						</div>
+						<a class="donate_btn" id="donate_btn" onclick="load_pic()" >￥ Donate me.</a>
+					</div>
+					<p></p>
+
+					<p>&nbsp</p>
+						
+					<!-- JiaThis Button BEGIN -->
+					<div class="jiathis_style"><span class="jiathis_txt">分享到：</span>
+						<a class="jiathis_button_weixin"></a>
+						<a class="jiathis_button_qzone"></a>
+						<a class="jiathis_button_tsina"></a>
+						<a class="jiathis_button_fb"></a>
+						<a href="http://www.jiathis.com/share?uid=2144985" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+						<a class="jiathis_counter_style"></a>
+					</div>
+					<script type="text/javascript" >
+					var jiathis_config={
+						data_track_clickback:true,
+						summary:"",
+						url:"http://www.bigbai.com.cn/2018/05/17/Deep Learning - From the Beginning/",
+						title: "Deep learning - From the Beginning",
+						shortUrl:false,
+						hideMore:false
+					}
+					</script>
+					<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=2144985" charset="utf-8"></script>
+					<!-- JiaThis Button END -->
+
+					<p>&nbsp</p>
+					
+					<!-- UY BEGIN -->
+					<div id="uyan_frame"></div>
+					<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2144985"></script>
+					<!-- UY END -->
+				</div>
+			</div>	
+		</div>
+		<!-- SIDE BAR -->
+<div class="col-md-3 sidebar">
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Categories
+				</h3>
+				<ul>
+					<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Big-Data/">Big Data</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Deep-Learning/">Deep Learning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interesting-Trick/">Interesting Trick</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Robotics/">Robotics</a><span class="category-list-count">1</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Tags
+				</h3
+				<ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SLAM/">SLAM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/">Spark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vision/">Vision</a><span class="tag-list-count">3</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row widget">
+		<div class="col-md-12">
+			<div class="categories-widget">
+				<h3 class="widget-title">
+					Archives
+				</h3
+				<ul>
+					<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">4</span></li></ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+			
+	</div>
+</section>
+
+		</div>
+		
+	</div>
+	<div>
+		<!-- BEGIN FOOTER -->
+<footer>
+	<div class="row">
+		<div class="col-md-12">
+			<p style="margin-bottom: 0">
+				© 2016 Designed by BIGBAI. Adapted to <a href="https://hexo.io/"> Hexo</a>
+			</p>             
+			<p >
+				-Friend：<a href="http://blackpoint-cx.github.io">BlackPoint</a>- 
+			</p>
+		</div>
+	</div>
+</footer>
+<!-- END FOOTER -->
+
+
+
+<!-- Back to top -->
+<div id="backtotop">       
+	<a class="to-top-btn sscroll" href="#top"><i class="fa fa-angle-double-up"></i></a>
+</div>
+	</div>
+
+    <!-- Library Scripts -->
+	<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/lib/jquery.preloader.js"></script>
+<script src="/js/lib/nivo-lightbox.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/lib/jquery.superslides.min.js"></script>
+<script src="/js/lib/smoothscroll.js"></script>
+<!--<script src="/js/lib/jquery.sudoslider.min.js"></script>-->
+<script src="/js/lib/jquery.bxslider.min.js"></script>
+<script src="/js/lib/jquery.mixitup.min.js"></script>
+<script src="/js/lib/jquery.backtotop.js"></script>
+<script src="/js/lib/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script src="/js/lib/retina.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<!-- Custom Script -->    
+<script src="/js/main.js"></script>
+
+<script>
+	function load_pic()
+		{
+		var imgObj = document.getElementById("aliqcode");
+		var Flag=(imgObj.getAttribute("src",2)=="/images/wechat.jpg")
+		imgObj.src=Flag?"":"/images/wechat.jpg";
+		
+		var textObj = document.getElementById("donate_btn");
+		if(textObj.innerHTML =="Scan WeChat QR Code")
+		{
+			textObj.innerHTML ="￥ Donate me.";
+		}
+		else
+		{
+			textObj.innerHTML ="Scan WeChat QR Code";
+		}
+	}
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+
+</html>

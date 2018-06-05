@@ -208,7 +208,7 @@ g++ -g main.cpp myHead.cpp -o main.o
 //botn win and ubuntu:
 &quot;cwd&quot;: &quot;${workspaceRoot}&quot;
 </code></pre><p>C++程序有很多include是需要包含的，如果检测不到，会报错，这些include路径可以在c_cpp_properties.json中添加，Ctrl+Shift+p，输入C/Cpp： Edit Configurations，会自动生成c_cpp_properties.json，在其中，根据对应的操作系统添加好include的path就行了。</p>
-<p>之后，可以使用ctrl—shift-b，编译出对应程序，按F5启动debug调试，设置断点。</p>
+<p>之后，可以使用ctrl+shift+b，编译出对应程序，按F5启动debug调试，设置断点。</p>
 <h3 id="MSBuild"><a href="#MSBuild" class="headerlink" title="MSBuild"></a><a style="color:#AE8D73"><strong>MSBuild</strong></a></h3><p>说到C++工程，不得不提VS的工程，如果我们拿到一个是由VS创建的工程文件夹。<a style="color: #CD661D">（含有.sln文件）</a>。怎么使用vscode来编译调试呢。g++肯定是不行了，这个时候就要使用MSBuild来配置。</p>
 <p>同样，先打开该工程文件夹。在Ctrl+Shift+p中输入Tasks: Configure Task Runner，此时。<a style="color: #CD661D">直接选择MSbuild不要选other</a>，来生成tasks.json，并修改其中的command为MSBuild.exe所在的路径:</p>
 <pre><code>&quot;version&quot;: &quot;0.1.0&quot;,
@@ -305,7 +305,7 @@ g++ -g main.cpp myHead.cpp -o main.o
 					Categories
 				</h3>
 				<ul>
-					<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Big-Data/">Big Data</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interesting-Trick/">Interesting Trick</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Robotics/">Robotics</a><span class="category-list-count">1</span></li></ul>
+					<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Big-Data/">Big Data</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Deep-Learning/">Deep Learning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Interesting-Trick/">Interesting Trick</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Robotics/">Robotics</a><span class="category-list-count">1</span></li></ul>
 				</ul>
 			</div>
 		</div>
@@ -318,7 +318,7 @@ g++ -g main.cpp myHead.cpp -o main.o
 					Tags
 				</h3
 				<ul>
-					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SLAM/">SLAM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/">Spark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vision/">Vision</a><span class="tag-list-count">2</span></li></ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SLAM/">SLAM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/">Spark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vision/">Vision</a><span class="tag-list-count">3</span></li></ul>
 				</ul>
 			</div>
 		</div>
@@ -331,7 +331,7 @@ g++ -g main.cpp myHead.cpp -o main.o
 					Archives
 				</h3
 				<ul>
-					<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">4</span></li></ul>
+					<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">4</span></li></ul>
 				</ul>
 			</div>
 		</div>

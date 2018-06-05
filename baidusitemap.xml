@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>http://www.bigbai.com.cn/2018/05/17/Deep%20Learning%20-%20From%20the%20Beginning/</loc>
+    <lastmod>2018-06-05T07:00:57.362Z</lastmod>
+    <data>
+        <display>
+        <title>Deep learning - From the Beginning</title>
+        <pubTime>2018-05-17T16:22:25.000Z</pubTime>
+        
+        <tag>Vision</tag>
+         
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Deep Learning" url="http://www.bigbai.com.cn/categories/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.bigbai.com.cn/2017/06/11/%E5%9C%A8vscode%E4%B8%AD%E9%85%8D%E7%BD%AEPython%E4%B8%8EC++%E7%9A%84%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2018-05-17T09:01:11.836Z</lastmod>
+    <lastmod>2018-05-17T09:06:36.286Z</lastmod>
     <data>
         <display>
         <title>在vscode中配置Python与C++的运行环境</title>
